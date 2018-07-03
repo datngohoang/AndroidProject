@@ -9,18 +9,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="50dp"
         android:background="#040147">
 
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="backToMenu"
-            app:srcCompat="@drawable/menu_icon" />
-
         <TextView
-            android:layout_width="69dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent" />
 
         <TextView
@@ -32,43 +25,84 @@
             android:textSize="28dp" />
 
         <TextView
-            android:layout_width="69dp"
+            android:layout_width="38dp"
             android:layout_height="match_parent" />
 
         <ImageView
             android:layout_width="7dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="backToMultipleMenu"
-            app:srcCompat="@drawable/close_icon"
-            />
+            android:onClick="backToMenu"
+            app:srcCompat="@drawable/close_icon" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="688dp"
-        android:layout_height="336dp"
+        android:layout_width="match_parent"
+        android:layout_height="337dp"
         android:orientation="horizontal"
         android:background="#2BCCD7">
 
         <LinearLayout
-            android:layout_width="160dp"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="388dp"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="140dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="388dp"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp"
+                app:srcCompat="@drawable/notebook" />
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="224dp"
+                android:layout_marginTop="33dp"
+                android:layout_marginLeft="35dp"
+                android:text="" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:background="@drawable/button_bg_round"
+                android:text="A"
+                android:textSize="40dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="6dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:background="@drawable/button_bg_round"
+                android:text="B"
+                android:textSize="40dp"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:background="@drawable/button_bg_round"
+                android:text="C"
+                android:textSize="40dp"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:background="@drawable/button_bg_round"
+                android:text="D"
+                android:textSize="40dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
