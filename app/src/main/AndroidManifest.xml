@@ -28,7 +28,8 @@
         <activity
             android:name=".MyWordActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".VocabularyActivity"></activity>
+        <activity android:name=".VocabularyActivity" />
+        <activity android:name=".ListeningActivity"></activity>
     </application>
 
 </manifest>
