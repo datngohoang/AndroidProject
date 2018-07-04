@@ -43,4 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void goToAbout(View view) {
+        Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+        startActivity(intent);
+    }
 }

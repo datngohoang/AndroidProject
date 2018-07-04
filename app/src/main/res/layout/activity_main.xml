@@ -90,7 +90,8 @@
                 android:layout_width="231dp"
                 android:layout_height="139dp"
                 android:layout_weight="1"
-                android:alpha="0" />
+                android:alpha="0"
+                android:onClick="goToAbout" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

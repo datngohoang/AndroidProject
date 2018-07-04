@@ -14,7 +14,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private String onChosing;
     private TextView txtQuestion;
     private TextView txtTime;
-    private TextView txtTotal;
+
     private TextView txtCurrent;
     private Button btnA;
     private Button btnB;
@@ -35,7 +35,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         String diff = b.getString("diff");//Easy, Normal, Hard
         //set total
         txtQuestion = (TextView) findViewById(R.id.txtTotal);
-        txtTotal.setText("Total: " + numQues);
+        txtQuestion.setText("Total: " + numQues);
         //set textview question
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
         txtCurrent = (TextView) findViewById(R.id.txtCurrent); 

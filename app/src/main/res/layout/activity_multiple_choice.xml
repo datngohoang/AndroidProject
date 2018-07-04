@@ -12,28 +12,17 @@
         android:layout_height="50dp"
         android:background="#040147">
 
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="backToMenu"
-            app:srcCompat="@drawable/menu_icon" />
-
         <TextView
             android:layout_width="69dp"
             android:layout_height="match_parent" />
 
         <TextView
-            android:layout_width="379dp"
+            android:layout_width="487dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="MULTIPLE CHOICE"
             android:textColor="#ffffff"
             android:textSize="28dp" />
-
-        <TextView
-            android:layout_width="69dp"
-            android:layout_height="match_parent" />
 
         <ImageView
             android:layout_width="7dp"
@@ -54,34 +43,40 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="148dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
+                android:layout_marginLeft="95dp"
                 android:gravity="fill"
+                android:text="Number Of Question"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="Please Choose Number Of Question"
-                />
+                android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/spinnerQues"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
                 android:layout_height="37dp"
                 android:background="#ffffff"
+                android:layout_gravity="center"
                 android:entries="@array/multiple_choice_category" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
+                android:layout_marginLeft="95dp"
                 android:gravity="fill"
+                android:text="Difficult"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="Please Choose Difficult"
-                />
+                android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/spinnerDiff"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
                 android:layout_height="37dp"
                 android:background="#ffffff"
-                android:entries="@array/multiple_choice_difficult"/>
+                android:layout_gravity="center"
+                android:entries="@array/multiple_choice_difficult" />
         </LinearLayout>
 
         <LinearLayout
