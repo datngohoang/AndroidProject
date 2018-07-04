@@ -28,9 +28,15 @@
         <activity
             android:name=".MyWordActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".VocabularyActivity" />
-        <activity android:name=".ListeningActivity" />
-        <activity android:name=".ScoreActivity"></activity>
+        <activity
+            android:name=".VocabularyActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ListeningActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ScoreActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

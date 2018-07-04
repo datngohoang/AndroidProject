@@ -15,16 +15,16 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
 
         txtScoreTitle = (TextView) findViewById(R.id.txtScoreTitle);
-        String scoreTitle = "Highest Score.............." +
-                "Last Score................" +
-                "Average Score..............";
+        String scoreTitle = "Highest Score.........\n" +
+                "Last Score..........\n" +
+                "Average Score.........\n";
 
         txtScoreTitle.setText(scoreTitle);
 
         txtScore = (TextView) findViewById(R.id.txtScore);
-        String score = "60" +
-                "50" +
-                "50";
+        String score = "60\n" +
+                "50\n" +
+                "50\n";
         txtScore.setText(score);
     }
 

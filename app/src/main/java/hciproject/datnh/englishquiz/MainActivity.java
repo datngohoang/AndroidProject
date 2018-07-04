@@ -1,12 +1,12 @@
 package hciproject.datnh.englishquiz;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-//test commit
+    //test commit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +22,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToVocabulary(View view) {
+        Intent intent = new Intent(MainActivity.this, VocabularyActivity.class);
+        startActivity(intent);
+    }
+
     public void goToMyWord(View view) {
         Intent intent = new Intent(MainActivity.this, MyWordActivity.class);
         startActivity(intent);
     }
+
+    public void goToListening(View view) {
+        Intent intent = new Intent(MainActivity.this, ListeningActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToScore(View view) {
+        Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+        startActivity(intent);
+    }
+
+
 }
