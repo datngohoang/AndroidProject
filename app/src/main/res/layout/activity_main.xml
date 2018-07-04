@@ -55,6 +55,7 @@
                 android:layout_width="242dp"
                 android:layout_height="139dp"
                 android:layout_weight="1"
+                android:onClick="goToVocabulary"
                 android:alpha="0" />
 
             <Button
@@ -73,6 +74,7 @@
                 android:id="@+id/btnListening"
                 android:layout_width="201dp"
                 android:layout_height="139dp"
+                android:onClick="goToListening"
                 android:alpha="0" />
 
             <Button
@@ -80,6 +82,7 @@
                 android:layout_width="231dp"
                 android:layout_height="139dp"
                 android:layout_weight="1"
+                android:onClick="goToScore"
                 android:alpha="0" />
 
             <Button
