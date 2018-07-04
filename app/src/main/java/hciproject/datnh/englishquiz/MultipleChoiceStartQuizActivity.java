@@ -11,6 +11,7 @@ import org.w3c.dom.Text;
 
 public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
 
+    private String onChosing;
     private TextView txtQuestion;
     private TextView txtTime;
     private TextView txtTotal;
@@ -19,6 +20,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private Button btnB;
     private Button btnC;
     private Button btnD;
+    private Button btnConfirm;
     private int mScore = 0;
     private int currentQues = 0;
 
@@ -33,7 +35,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         String diff = b.getString("diff");//Easy, Normal, Hard
         //set total
         txtQuestion = (TextView) findViewById(R.id.txtTotal);
-        txtTotal.setText(numQues);
+        txtTotal.setText("Total: " + numQues);
         //set textview question
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
         txtCurrent = (TextView) findViewById(R.id.txtCurrent); 
@@ -46,35 +48,49 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         btnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dao
-                //boolean = dao.checkMultipleResult();
+                //change color
+                onChosing = "a";
             }
         });
         btnB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //change color
+                onChosing = "b";
             }
         });
         btnC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //change color
+                onChosing = "c";
             }
         });
         btnD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //change color
+                onChosing = "d";
             }
         });
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //dao
+                //boolean = dao.checkMultipleResult();
+            }
+        });
+    }
+
+    private void changeBgButton(String choice) {
+
     }
 
     private void setTextview(){
         currentQues++;
         //dao
         //get and set ques
-        txtCurrent.setText("" + currentQues);
+        txtCurrent.setText("Current: " + currentQues);
     }
 
     public void backToMenu(View view) {
