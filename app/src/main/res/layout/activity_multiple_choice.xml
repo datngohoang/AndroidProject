@@ -63,7 +63,7 @@
                 android:text="Please Choose Number Of Question"
                 />
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/spinnerQues"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:background="#ffffff"
@@ -77,7 +77,7 @@
                 android:text="Please Choose Difficult"
                 />
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/spinnerDiff"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:background="#ffffff"
