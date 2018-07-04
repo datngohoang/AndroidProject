@@ -15,9 +15,9 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
 
         txtScoreTitle = (TextView) findViewById(R.id.txtScoreTitle);
-        String scoreTitle = "Highest Score.........\n" +
-                "Last Score..........\n" +
-                "Average Score.........\n";
+        String scoreTitle = "Highest Score\n" +
+                "Last Score\n" +
+                "Average Score\n";
 
         txtScoreTitle.setText(scoreTitle);
 
