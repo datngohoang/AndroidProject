@@ -45,10 +45,16 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             
             int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
             String diff = spinDiff.getSelectedItem().toString();
+            intent.putExtra("numQues", numQues);
+            intent.putExtra("diff", diff);
+            startActivity(intent);
         } else if(fromScreen == 1){
 
             int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
             String diff = spinDiff.getSelectedItem().toString();
+            intent.putExtra("numQues", numQues);
+            intent.putExtra("diff", diff);
+            startActivity(intent);
         }
 
     }
