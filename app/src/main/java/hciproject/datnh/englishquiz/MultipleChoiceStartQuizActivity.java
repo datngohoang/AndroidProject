@@ -38,6 +38,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         txtQuestion.setText("Total: " + numQues);
         //set time
         time = calculateTime(numQues);
+        txtTime = (TextView)findViewById(R.id.txtTime);
 
         //set textview question
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
@@ -49,12 +50,14 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         btnC = (Button)findViewById(R.id.btnC);
         btnD = (Button)findViewById(R.id.btnD);
         btnConfirm = (Button)findViewById(R.id.btnConfirm);
+        btnConfirm.setEnabled(false);
         btnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //change color
                 onChosing = "a";
                 changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
             }
         });
         btnB.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +66,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
                 //change color
                 onChosing = "b";
                 changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
             }
         });
         btnC.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +75,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
                 //change color
                 onChosing = "c";
                 changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
             }
         });
         btnD.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +84,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
                 //change color
                 onChosing = "d";
                 changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
             }
         });
         btnConfirm.setOnClickListener(new View.OnClickListener() {

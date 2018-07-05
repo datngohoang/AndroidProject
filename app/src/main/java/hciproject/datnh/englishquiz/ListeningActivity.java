@@ -4,13 +4,135 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class ListeningActivity extends AppCompatActivity {
+
+    private TextView txtQuestion;
+    private TextView txtTime;
+    private TextView txtCurrent;
+    private TextView txtScore;
+    private Button btnA;
+    private Button btnB;
+    private Button btnC;
+    private Button btnD;
+    private Button btnConfirm;
+    private int mScore = 0;
+    private int currentQues = 0;
+    private int time;
+    private int numQues;
+    private String diff;
+    private String onChosing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening);
+        //set score
+        txtScore = (TextView)findViewById(R.id.txtScore) ;
+        txtScore.setText("" + mScore);
+        //get num of ques and difficulty
+        numQues = getIntent().getExtras().getInt("numQues");//5, 10, 20, 40
+        diff = getIntent().getExtras().getString("diff");//Easy, Normal, Hard
+        //set total
+        txtQuestion = (TextView) findViewById(R.id.txtTotal);
+        txtQuestion.setText("Total: " + numQues);
+        //set time
+        time = calculateTime(numQues);
+        txtTime = (TextView)findViewById(R.id.txtTime);
+
+        //set textview question
+        txtQuestion = (TextView) findViewById(R.id.txtQuestion);
+        txtCurrent = (TextView) findViewById(R.id.txtCurrent);
+        setTextview();
+        //check answer
+        btnA = (Button)findViewById(R.id.btnA);
+        btnB = (Button)findViewById(R.id.btnB);
+        btnC = (Button)findViewById(R.id.btnC);
+        btnD = (Button)findViewById(R.id.btnD);
+        btnConfirm = (Button)findViewById(R.id.btnConfirm);
+        btnConfirm.setEnabled(false);
+        btnA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //change color
+                onChosing = "a";
+                changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
+            }
+        });
+        btnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //change color
+                onChosing = "b";
+                changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
+            }
+        });
+        btnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //change color
+                onChosing = "c";
+                changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
+            }
+        });
+        btnD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //change color
+                onChosing = "d";
+                changeBgButton(onChosing);
+                btnConfirm.setEnabled(true);
+            }
+        });
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //dao
+                //boolean = dao.checkMultipleResult();
+                //mScore++;
+                txtScore.setText("" + mScore);
+            }
+        });
+    }
+
+    private void changeBgButton(String choice) {
+        if (choice.equals("a")) {
+            btnA.setBackgroundResource(R.drawable.button_bg_round_chosen);
+            btnB.setBackgroundResource(R.drawable.button_bg_round);
+            btnC.setBackgroundResource(R.drawable.button_bg_round);
+            btnD.setBackgroundResource(R.drawable.button_bg_round);
+        } else if (choice.equals("b")) {
+            btnA.setBackgroundResource(R.drawable.button_bg_round);
+            btnB.setBackgroundResource(R.drawable.button_bg_round_chosen);
+            btnC.setBackgroundResource(R.drawable.button_bg_round);
+            btnD.setBackgroundResource(R.drawable.button_bg_round);
+        } else if (choice.equals("c")) {
+            btnA.setBackgroundResource(R.drawable.button_bg_round);
+            btnB.setBackgroundResource(R.drawable.button_bg_round);
+            btnC.setBackgroundResource(R.drawable.button_bg_round_chosen);
+            btnD.setBackgroundResource(R.drawable.button_bg_round);
+        } else if (choice.equals("d")) {
+            btnA.setBackgroundResource(R.drawable.button_bg_round);
+            btnB.setBackgroundResource(R.drawable.button_bg_round);
+            btnC.setBackgroundResource(R.drawable.button_bg_round);
+            btnD.setBackgroundResource(R.drawable.button_bg_round_chosen);
+        }
+    }
+
+    private int calculateTime(int numQues) {
+        return numQues * 60;
+    }
+
+    private void setTextview(){
+        currentQues++;
+        //dao
+        //get and set ques
+        txtCurrent.setText("Current: " + currentQues);
     }
 
     public void backToMenu(View view) {
