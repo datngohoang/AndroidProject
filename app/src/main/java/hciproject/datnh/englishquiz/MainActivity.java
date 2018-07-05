@@ -7,6 +7,9 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     //test commit
+    public  static  final int FROMQUIZ = 0;
+    public  static  final int FROMLISTEN = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToMultipleChoice(View view) {
         Intent intent = new Intent(MainActivity.this, MultipleChoiceActivity.class);
+        intent.putExtra("fromActivity",FROMQUIZ);
         startActivity(intent);
     }
 
@@ -33,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToListening(View view) {
-        Intent intent = new Intent(MainActivity.this, ListeningActivity.class);
+        Intent intent = new Intent(MainActivity.this, MultipleChoiceActivity.class);
+        intent.putExtra("fromActivity",FROMLISTEN);
+
         startActivity(intent);
     }
 
