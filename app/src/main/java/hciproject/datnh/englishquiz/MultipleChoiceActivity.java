@@ -5,11 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MultipleChoiceActivity extends AppCompatActivity {
 
     private Spinner spinQues = null;
     private Spinner spinDiff = null;
+    private int fromScreen;
+    private TextView txtScreenTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,18 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
         spinQues = (Spinner)findViewById(R.id.spinnerQues);
         spinDiff = (Spinner)findViewById(R.id.spinnerDiff);
+        Bundle bd = new Bundle();
+        bd = getIntent().getExtras();
+        fromScreen = bd.getInt("fromActivity");//0,1
+        if(fromScreen == 0){
+            txtScreenTitle = (TextView) findViewById(R.id.txtTitle);
+            String title = "MULTIPLE CHOICE";
+            txtScreenTitle.setText(title);
+        } else if(fromScreen == 1){
+            txtScreenTitle = (TextView) findViewById(R.id.txtTitle);
+            String title = "LISTEN";
+            txtScreenTitle.setText(title);
+        }
     }
 
     public void backToMenu(View view) {
@@ -26,11 +41,15 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     }
 
     public void doQuiz(View view) {
-        Intent intent = new Intent(MultipleChoiceActivity.this, MultipleChoiceStartQuizActivity.class);
-        int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
-        String diff = spinDiff.getSelectedItem().toString();
-        intent.putExtra("numQues", numQues);
-        intent.putExtra("diff", diff);
-        startActivity(intent);
+        if(fromScreen == 0){
+            Intent intent = new Intent(MultipleChoiceActivity.this, MultipleChoiceStartQuizActivity.class);
+            int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
+            String diff = spinDiff.getSelectedItem().toString();
+        } else if(fromScreen == 1){
+            Intent intent = new Intent(MultipleChoiceActivity.this, ListeningActivity.class);
+            int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
+            String diff = spinDiff.getSelectedItem().toString();
+        }
+
     }
 }

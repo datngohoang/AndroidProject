@@ -17,6 +17,7 @@
             android:layout_height="match_parent" />
 
         <TextView
+            android:id="@+id/txtTitle"
             android:layout_width="487dp"
             android:layout_height="match_parent"
             android:gravity="center"
