@@ -42,14 +42,14 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     public void doQuiz(View view) {
         if(fromScreen == 0){
-            
+            Intent intent = new Intent(this, MultipleChoiceStartQuizActivity.class);
             int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
             String diff = spinDiff.getSelectedItem().toString();
             intent.putExtra("numQues", numQues);
             intent.putExtra("diff", diff);
             startActivity(intent);
         } else if(fromScreen == 1){
-
+            Intent intent = new Intent(this, ListeningActivity.class);
             int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
             String diff = spinDiff.getSelectedItem().toString();
             intent.putExtra("numQues", numQues);
