@@ -1,6 +1,8 @@
 package hciproject.datnh.englishquiz;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,7 @@ import org.w3c.dom.Text;
 public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
 
     private TextView txtQuestion;
-    private TextView txtTime;
+    private TextView txtTimer;
     private TextView txtCurrent;
     private Button btnA;
     private Button btnB;
@@ -20,8 +22,9 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private Button btnD;
     private Button btnConfirm;
     private int mScore = 0;
+    private String finalScore;
     private int currentQues = 0;
-    private int time;
+    private long time;
     private int numQues;
     private String diff;
     private String onChosing;
@@ -38,8 +41,31 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         txtQuestion.setText("Total: " + numQues);
         //set time
         time = calculateTime(numQues);
-        txtTime = (TextView)findViewById(R.id.txtTime);
+        txtTimer = (TextView)findViewById(R.id.txtTimer);
+        CountDownTimer timer = new CountDownTimer(time, 1000) {
 
+            @Override
+            public void onTick(long millisUntilFinished) {
+                time = millisUntilFinished;
+                //Update txtTimer
+                int mins = (int)time / 60000;
+                int seconds = (int)time % 60000 / 1000;
+                String timeLeftText;
+                timeLeftText = "" + mins;
+                timeLeftText += ":";
+                if (seconds < 10) timeLeftText += "0";
+                timeLeftText += seconds;
+                txtTimer.setText(timeLeftText);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
+                finalScore = mScore + "/" + numQues;
+                intent.putExtra("finalScore", finalScore);
+                startActivity(intent);
+            }
+        }.start();
         //set textview question
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
         txtCurrent = (TextView) findViewById(R.id.txtCurrent); 
@@ -121,8 +147,8 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         }
     }
 
-    private int calculateTime(int numQues) {
-        return numQues * 60;
+    private long calculateTime(int numQues) {
+        return numQues * 60 * 1000;
     }
 
     private void setTextview(){
@@ -133,12 +159,9 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     }
 
     public void backToMenu(View view) {
-        Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void backToMultipleMenu(View view) {
-        Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, MultipleChoiceActivity.class);
+        Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
+        finalScore = mScore + "/" + numQues;
+        intent.putExtra("finalScore", finalScore);
         startActivity(intent);
     }
 }
