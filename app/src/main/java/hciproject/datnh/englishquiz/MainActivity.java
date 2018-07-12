@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import hciproject.datnh.englishquiz.communicator.ApiConnector;
+
 public class MainActivity extends AppCompatActivity {
     //test commit
     public  static  final int FROMQUIZ = 0;
