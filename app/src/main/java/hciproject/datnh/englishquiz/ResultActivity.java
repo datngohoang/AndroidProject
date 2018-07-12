@@ -10,12 +10,17 @@ public class ResultActivity extends AppCompatActivity {
 
     private TextView txtScore;
     private String finalScore;
+    private int getIntentFrom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         //set score
+        Bundle bd = new Bundle();
+        bd = getIntent().getExtras();
+        getIntentFrom = bd.getInt("scoreFromIntent");
+
         txtScore = (TextView)findViewById(R.id.txtScore);
         finalScore = getIntent().getExtras().getString("finalScore");
         txtScore.setText("" + finalScore);
