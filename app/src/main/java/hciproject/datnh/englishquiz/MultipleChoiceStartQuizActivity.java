@@ -12,7 +12,8 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
-
+    public static final int SCORE_FROM_QUIZ = 0;
+    public static final int SCORE_FROM_LISTEN = 1;
     private TextView txtQuestion;
     private TextView txtTimer;
     private TextView txtCurrent;
@@ -62,6 +63,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             public void onFinish() {
                 Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
                 finalScore = mScore + "/" + numQues;
+                intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
                 intent.putExtra("finalScore", finalScore);
                 startActivity(intent);
             }
@@ -161,6 +163,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     public void backToMenu(View view) {
         Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
         finalScore = mScore + "/" + numQues;
+        intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
         intent.putExtra("finalScore", finalScore);
         startActivity(intent);
     }

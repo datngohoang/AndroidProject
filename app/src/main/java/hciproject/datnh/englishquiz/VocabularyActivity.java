@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class VocabularyActivity extends AppCompatActivity {
+    public static final int SCORE_FROM_VOCABULARY = 2;
     private String[] words;
     private String[] blankWords;
     private String word = "V O C A B U L A R Y";
     private String blankWord = "V O C _ _ _ L _ R Y";
-    private String fillWord ="";
+    private String fillWord = "";
     private int countFail = 5;
     private boolean checkRight = false;
     private Button btnWord;
@@ -37,8 +38,8 @@ public class VocabularyActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     System.out.println(btnWord.getText());
-                    fillInWord((Button)v);
-                    invisibleButton((Button)v);
+                    fillInWord((Button) v);
+                    invisibleButton((Button) v);
                     fillWord = "";
                 }
             });
@@ -69,7 +70,7 @@ public class VocabularyActivity extends AppCompatActivity {
         for (int i = 0; i < blankWords.length; i++) {
             if (i == blankWords.length - 1) {
                 fillWord += blankWords[i];
-            }else {
+            } else {
                 fillWord += blankWords[i] + " ";
             }
         }
@@ -80,12 +81,16 @@ public class VocabularyActivity extends AppCompatActivity {
                 score = score + 10;
                 TextView txtScore = (TextView) findViewById(R.id.txtScore);
                 txtScore.setText(score);
+
             }
         } else {
-            if (countFail == 0) {
-                //TODO: Fail còn 0, Chuyển sang trang result
+            if (countFail == 1) {
+                //TODO: Fail còn 1, Chuyển sang trang result
                 Intent intent = new Intent(this, ResultActivity.class);
+                intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
+                intent.putExtra("finalScore", score + "");
                 startActivity(intent);
+
             } else {
                 //TODO Fail < 5, sai -1
                 countFail = countFail - 1;
@@ -97,9 +102,13 @@ public class VocabularyActivity extends AppCompatActivity {
         //TODO: Set Text
         showWord = (TextView) findViewById(R.id.txtShowWord);
         showWord.setText(fillWord);
+        checkRight = false;
+    }
 
-
-
+    public void goToNextQuestion() {
+        score = score + 10;
+        TextView txtScore = (TextView) findViewById(R.id.txtScore);
+        txtScore.setText(score + "");
     }
 
     public void backToMenu(View view) {
