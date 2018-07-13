@@ -23,7 +23,7 @@ public class ScoreActivity extends AppCompatActivity {
             System.out.println(name);
             int id = getResources().getIdentifier(name, "id", this.getPackageName());
             imageView = (ImageView) findViewById(id);
-            imageView.ge
+
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

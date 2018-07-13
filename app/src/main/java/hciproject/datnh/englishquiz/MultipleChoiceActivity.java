@@ -44,12 +44,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     }
 
     public void doQuiz(View view) {
-//        new Thread(new Runnable() {
-//            public void run() {
-//            MultipleChoiceQuizModel model = ApiConnector.callMultipleChoiceApi(2,1);
-//            //put extra and go to another activity
-//            }
-//        }).start();
+
         if(fromScreen == 0){
             Intent intent = new Intent(this, MultipleChoiceStartQuizActivity.class);
             int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());

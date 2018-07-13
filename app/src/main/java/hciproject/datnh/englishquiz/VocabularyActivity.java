@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import hciproject.datnh.englishquiz.communicator.ApiConnector;
+import hciproject.datnh.englishquiz.entity.WordQuizEntity;
+import hciproject.datnh.englishquiz.model.WordQuizModel;
+
 public class VocabularyActivity extends AppCompatActivity {
     public static final int SCORE_FROM_VOCABULARY = 2;
     private String[] words;
@@ -21,6 +25,7 @@ public class VocabularyActivity extends AppCompatActivity {
     private TextView showWord;
     private TextView showFail;
     private TextView showScore;
+    private String[] listQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +35,12 @@ public class VocabularyActivity extends AppCompatActivity {
         showWord.setText(blankWord);
         for (char i = 65; i < 91; i++) {
             String name = (String) "btn" + i;
-            System.out.println(name);
             int id = getResources().getIdentifier(name, "id", this.getPackageName());
             btnWord = (Button) findViewById(id);
 
             btnWord.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(btnWord.getText());
                     fillInWord((Button) v);
                     invisibleButton((Button) v);
                     fillWord = "";
@@ -81,7 +84,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 score = score + 10;
                 TextView txtScore = (TextView) findViewById(R.id.txtScore);
                 txtScore.setText(score);
-
+                goToNextQuestion();
             }
         } else {
             if (countFail == 1) {
@@ -106,9 +109,23 @@ public class VocabularyActivity extends AppCompatActivity {
     }
 
     public void goToNextQuestion() {
-        score = score + 10;
-        TextView txtScore = (TextView) findViewById(R.id.txtScore);
-        txtScore.setText(score + "");
+        //TODO: hiển thị câu hỏi tiếp theo trên TextView
+
+    }
+
+    public void showAgainButton() {
+        for (char i = 65; i < 91; i++) {
+            String name = (String) "btn" + i;
+            System.out.println(name);
+            int id = getResources().getIdentifier(name, "id", this.getPackageName());
+            btnWord = (Button) findViewById(id);
+            btnWord.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+    public void getListQuestion(){
+
     }
 
     public void backToMenu(View view) {

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import hciproject.datnh.englishquiz.communicator.ApiConnector;
+import hciproject.datnh.englishquiz.entity.WordQuizEntity;
 
 public class MainActivity extends AppCompatActivity {
     //test commit
@@ -34,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToMyWord(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                WordQuizEntity entity = ApiConnector.callWordApi();
+            }
+        });
+
+
         Intent intent = new Intent(MainActivity.this, MyWordActivity.class);
         startActivity(intent);
     }

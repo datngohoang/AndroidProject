@@ -9,9 +9,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#040147"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_height="50dp">
+        android:background="#040147">
 
         <TextView
             android:layout_width="550dp"
@@ -26,17 +26,56 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="backToMenu"
-            app:srcCompat="@drawable/close_icon"
-            />
+            app:srcCompat="@drawable/close_icon" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#2BCCD7">
-        <ListView
+        android:background="#2BCCD7"
+        android:orientation="vertical">
+
+        <TableLayout
+
+            android:id="@+id/tblWord"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <TableRow
+
+                android:layout_width="match_parent"
+                android:layout_height="20px"
+                android:background="@color/colorAccent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="Time" />
+
+                <TextView
+                    android:id="@+id/textClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:text="Halo" />
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
     </LinearLayout>
 
 </LinearLayout>
