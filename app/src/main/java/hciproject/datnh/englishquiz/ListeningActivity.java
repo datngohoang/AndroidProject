@@ -1,10 +1,12 @@
 package hciproject.datnh.englishquiz;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -218,12 +220,27 @@ public class ListeningActivity extends AppCompatActivity {
     }
 
     public void backToMenu(View view) {
-        Intent intent = new Intent(this, ResultActivity.class);
-        finalScore = mScore + "/" + numQues;
-        intent.putExtra("finalScore", finalScore);
-        mediaPlayer.release();
-        handler.removeCallbacks(runnable);
-        startActivity(intent);
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Confirmation")
+                .setMessage("Are you sure you want to finish the test?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ListeningActivity.this, ResultActivity.class);
+                        finalScore = mScore + "/" + numQues;
+                        intent.putExtra("finalScore", finalScore);
+                        mediaPlayer.release();
+                        handler.removeCallbacks(runnable);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
     public void playMedia(View view) {

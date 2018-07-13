@@ -1,7 +1,10 @@
 package hciproject.datnh.englishquiz;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,8 @@ public class VocabularyActivity extends AppCompatActivity {
     private TextView showWord;
     private TextView showFail;
     private TextView showScore;
+    private long time;
+    private TextView txtTimer;
     private String[] listQuestion;
 
     @Override
@@ -33,6 +38,32 @@ public class VocabularyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vocabulary);
         showWord = (TextView) findViewById(R.id.txtShowWord);
         showWord.setText(blankWord);
+        //set time
+        time = 60 * 1000;
+        txtTimer = (TextView)findViewById(R.id.txtTimer);
+        CountDownTimer timer = new CountDownTimer(time, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                time = millisUntilFinished;
+                //Update txtTimer
+                int mins = (int)time / 60000;
+                int seconds = (int)time % 60000 / 1000;
+                String timeLeftText;
+                timeLeftText = "" + mins;
+                timeLeftText += ":";
+                if (seconds < 10) timeLeftText += "0";
+                timeLeftText += seconds;
+                txtTimer.setText(timeLeftText);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
+                intent.putExtra("finalScore", score + "");
+                startActivity(intent);
+            }
+        }.start();
         for (char i = 65; i < 91; i++) {
             String name = (String) "btn" + i;
             int id = getResources().getIdentifier(name, "id", this.getPackageName());
@@ -129,7 +160,22 @@ public class VocabularyActivity extends AppCompatActivity {
     }
 
     public void backToMenu(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Confirmation")
+                .setMessage("Are you sure you want to finish the game?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(VocabularyActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 }
