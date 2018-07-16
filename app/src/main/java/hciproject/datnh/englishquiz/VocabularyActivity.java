@@ -78,11 +78,8 @@ public class VocabularyActivity extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
-    //TODO: không hiển thị Button sau khi nhấn
     public void invisibleButton(Button button) {
         button.setVisibility(View.INVISIBLE);
     }

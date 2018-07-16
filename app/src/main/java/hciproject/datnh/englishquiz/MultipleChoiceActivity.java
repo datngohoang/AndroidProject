@@ -1,12 +1,16 @@
 package hciproject.datnh.englishquiz;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import hciproject.datnh.englishquiz.common.Constant;
 import hciproject.datnh.englishquiz.communicator.ApiConnector;
 import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 
@@ -44,14 +48,10 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     }
 
     public void doQuiz(View view) {
-
         if(fromScreen == 0){
-            Intent intent = new Intent(this, MultipleChoiceStartQuizActivity.class);
-            int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
-            String diff = spinDiff.getSelectedItem().toString();
-            intent.putExtra("numQues", numQues);
-            intent.putExtra("diff", diff);
-            startActivity(intent);
+            Runnable r = createRunnable();
+            Thread t = new Thread(r);
+            t.start();
         } else if(fromScreen == 1){
             Intent intent = new Intent(this, ListeningActivity.class);
             int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
@@ -61,5 +61,26 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+
+    private Runnable createRunnable() {
+        final Intent intent = new Intent(this, MultipleChoiceStartQuizActivity.class);
+        final int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
+        final String diff = spinDiff.getSelectedItem().toString();
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                intent.putExtra("numQues", numQues);
+                intent.putExtra("diff", diff);
+                //get data
+                MultipleChoiceQuizModel model = ApiConnector.callMultipleChoiceApi(numQues, 1);
+                String json = (new Gson()).toJson(model);
+                intent.putExtra("model", json);
+                startActivity(intent);
+            }
+        };
+
+        return runnable;
     }
 }

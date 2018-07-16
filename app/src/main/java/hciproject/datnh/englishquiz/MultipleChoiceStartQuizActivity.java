@@ -11,7 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.w3c.dom.Text;
+
+import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 
 public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     public static final int SCORE_FROM_QUIZ = 0;
@@ -39,6 +43,12 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         //get num of ques and difficulty
         numQues = getIntent().getExtras().getInt("numQues");//5, 10, 20, 40
         diff = getIntent().getExtras().getString("diff");//Easy, Normal, Hard
+        //get json
+        String json = getIntent().getExtras().getString("model");
+        MultipleChoiceQuizModel model = (new Gson()).fromJson(json, MultipleChoiceQuizModel.class);
+        System.out.println(model.getDifficult());
+        System.out.println(model.getQuestions().size());
+
         //set total
         txtQuestion = (TextView) findViewById(R.id.txtTotal);
         txtQuestion.setText("Total: " + numQues);
