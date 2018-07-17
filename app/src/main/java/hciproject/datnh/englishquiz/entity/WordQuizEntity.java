@@ -5,6 +5,8 @@ public class WordQuizEntity {
     private String name;
     private String word;
     private String blankWord;
+    private String meaning;
+    private String type;
 
     public WordQuizEntity() {
     }
@@ -14,6 +16,21 @@ public class WordQuizEntity {
         this.name = name;
         this.word = word;
         this.blankWord = blankWord;
+    }
+
+    public WordQuizEntity(String name, String meaning, String type) {
+        this.name = name;
+        this.meaning = meaning;
+        this.type = type;
+    }
+
+    public WordQuizEntity(int id, String name, String word, String blankWord, String meaning, String type) {
+        this.id = id;
+        this.name = name;
+        this.word = word;
+        this.blankWord = blankWord;
+        this.meaning = meaning;
+        this.type = type;
     }
 
     public int getId() {
@@ -46,5 +63,21 @@ public class WordQuizEntity {
 
     public void setBlankWord(String blankWord) {
         this.blankWord = blankWord;
+    }
+
+    public String getMeaning() {
+        return meaning;
+    }
+
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

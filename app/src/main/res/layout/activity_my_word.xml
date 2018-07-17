@@ -33,13 +33,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#2BCCD7"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-T
-        </ListView>
-    </LinearLayout>
+        android:id="@+id/lvDictionary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+</LinearLayout>
 </LinearLayout>
