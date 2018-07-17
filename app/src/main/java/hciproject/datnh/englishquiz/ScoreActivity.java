@@ -30,6 +30,7 @@ public class ScoreActivity extends AppCompatActivity {
         quizImgView = (ImageView) findViewById(R.id.txtQuizScore);
         listeningImgView = (ImageView) findViewById(R.id.txtListenScore);
         vocabularyImgView = (ImageView) findViewById(R.id.txtVocaScore);
+        listeningImgView.performClick();
     }
 
     public void backToMenu(View view) {
