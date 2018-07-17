@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import hciproject.datnh.englishquiz.common.Constant;
 import hciproject.datnh.englishquiz.communicator.ApiConnector;
+import hciproject.datnh.englishquiz.model.ListeningQuizModel;
 import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 
 public class MultipleChoiceActivity extends AppCompatActivity {
@@ -48,37 +49,36 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     }
 
     public void doQuiz(View view) {
-        if(fromScreen == 0){
-            Runnable r = createRunnable();
-            Thread t = new Thread(r);
-            t.start();
-        } else if(fromScreen == 1){
-            Intent intent = new Intent(this, ListeningActivity.class);
-            int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
-            String diff = spinDiff.getSelectedItem().toString();
-            intent.putExtra("numQues", numQues);
-            intent.putExtra("diff", diff);
-            startActivity(intent);
-        }
-
+        Runnable r = createRunnable();
+        Thread t = new Thread(r);
+        t.start();
     }
 
     private Runnable createRunnable() {
-        final Intent intent = new Intent(this, MultipleChoiceStartQuizActivity.class);
         final int numQues = Integer.parseInt(spinQues.getSelectedItem().toString());
         final String diff = spinDiff.getSelectedItem().toString();
 
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                intent.putExtra("numQues", numQues);
+                if (fromScreen == 0) {
+                    final Intent intentMul = new Intent(MultipleChoiceActivity.this, MultipleChoiceStartQuizActivity.class);
+                    intentMul.putExtra("numQues", numQues);
 //                intent.putExtra("diff", diff);
-                //get data
-                //first param is diff, 2nd is quantity
-                MultipleChoiceQuizModel model = ApiConnector.callMultipleChoiceApi(changeDiffToDiffInt(diff), numQues);
-                String json = (new Gson()).toJson(model);
-                intent.putExtra("model", json);
-                startActivity(intent);
+                    //get data
+                    //first param is diff, 2nd is quantity
+                    MultipleChoiceQuizModel model = ApiConnector.callMultipleChoiceApi(changeDiffToDiffInt(diff), numQues);
+                    String json = (new Gson()).toJson(model);
+                    intentMul.putExtra("model", json);
+                    startActivity(intentMul);
+                } else if (fromScreen == 1){
+                    final Intent intentLis = new Intent(MultipleChoiceActivity.this, ListeningActivity.class);
+                    intentLis.putExtra("numQues", numQues);
+                    ListeningQuizModel model = ApiConnector.callListeningApi(changeDiffToDiffInt(diff), numQues);
+                    String json = (new Gson()).toJson(model);
+//                    intentLis.putExtra("diff", diff);
+                    startActivity(intentLis);
+                }
             }
         };
 
