@@ -91,6 +91,7 @@
                 android:gravity="center" />
 
             <TextView
+                android:id="@+id/txtScore"
                 android:layout_width="50dp"
                 android:layout_height="64dp"
                 android:gravity="center"

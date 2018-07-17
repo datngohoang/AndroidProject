@@ -97,10 +97,10 @@ public class FakeController {
         List<WordQuizEntity> entities = new ArrayList<>();
 
         String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness"};
-        String[] word = {"V O C A B U L A R Y", "E N T E R P R _ S E", "E F F I C I E N C Y",
+        String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
                 "U S A B I L I T Y", "E F F E C T I V E N E S S"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
-                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _S S"};
+                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S"};
 
         for (int i = 0; i < 5; i++) {
             WordQuizEntity entity = new WordQuizEntity();
@@ -124,10 +124,10 @@ public class FakeController {
         WordQuizEntity entity = new WordQuizEntity();
 
         String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness"};
-        String[] word = {"V O C A B U L A R Y", "E N T E R P R _ S E", "E F F I C I E N C Y",
+        String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
                 "U S A B I L I T Y", "E F F E C T I V E N E S S"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
-                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _S S"};
+                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S"};
 
         Random random = new Random();
         int n = random.nextInt(5);
