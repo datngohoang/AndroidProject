@@ -19,6 +19,26 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/txtMean"
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Truong Dinh Chien"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="0988933xxx"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,23 +46,6 @@
             android:layout_marginLeft="50dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtMean"
-                android:layout_width="237dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Truong Dinh Chien"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="0988933xxx"
-                android:textSize="16sp"
-                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
