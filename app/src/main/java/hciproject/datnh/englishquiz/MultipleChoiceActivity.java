@@ -76,6 +76,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
                     intentLis.putExtra("numQues", numQues);
                     ListeningQuizModel model = ApiConnector.callListeningApi(changeDiffToDiffInt(diff), numQues);
                     String json = (new Gson()).toJson(model);
+                    intentLis.putExtra("model", json);
 //                    intentLis.putExtra("diff", diff);
                     startActivity(intentLis);
                 }

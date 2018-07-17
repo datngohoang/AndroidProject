@@ -38,13 +38,14 @@ public class ListeningActivity extends AppCompatActivity {
     private Button btnC;
     private Button btnD;
     private Button btnConfirm;
+    private Button btnPlay;
     private int mScore = 0;
     private String finalScore;
     private int indexQues = 0;
     private int currentQues = 1;
-    private long time;
+    private long time = 0;
     private int numQues;
-//    private String diff;
+    //    private String diff;
     private String onChosing;
     private SeekBar seekBar;
     private MediaPlayer mediaPlayer;
@@ -53,13 +54,14 @@ public class ListeningActivity extends AppCompatActivity {
     private List<ListeningQuizEntity> listQuestion;
     private ArrayList<SongModel> listSong;
     private int position = 0;
+    private CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening);
         //set score
-        txtScore = (TextView)findViewById(R.id.txtScore) ;
+        txtScore = (TextView) findViewById(R.id.txtScore);
         txtScore.setText("" + mScore);
         //get num of ques and difficulty
         numQues = getIntent().getExtras().getInt("numQues");//5, 10, 20, 40
@@ -69,6 +71,7 @@ public class ListeningActivity extends AppCompatActivity {
         ListeningQuizModel model = (new Gson()).fromJson(json, ListeningQuizModel.class);
         listQuestion = new ArrayList<>();
         listQuestion.addAll(model.getQuestions());
+        System.out.println("Questions Music: " + listQuestion.size());
         //addSongList
         addSongList();
         //set total
@@ -76,15 +79,15 @@ public class ListeningActivity extends AppCompatActivity {
         txtTotal.setText("Total: " + numQues);
         //set time
         time = calculateTime(numQues);
-        txtTimer = (TextView)findViewById(R.id.txtTimer);
-        CountDownTimer timer = new CountDownTimer(time, 1000) {
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
+        timer = new CountDownTimer(time, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 time = millisUntilFinished;
                 //Update txtTimer
-                int mins = (int)time / 60000;
-                int seconds = (int)time % 60000 / 1000;
+                int mins = (int) time / 60000;
+                int seconds = (int) time % 60000 / 1000;
                 String timeLeftText;
                 timeLeftText = "" + mins;
                 timeLeftText += ":";
@@ -95,17 +98,13 @@ public class ListeningActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(ListeningActivity.this, ResultActivity.class);
-                finalScore = mScore + "/" + numQues;
-                intent.putExtra("finalScore", finalScore);
-                mediaPlayer.release();
-                handler.removeCallbacks(runnable);
-                startActivity(intent);
+                exitToResult();
             }
         }.start();
         //set music
         handler = new Handler();
-        seekBar = (SeekBar)findViewById(R.id.seekBar);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setEnabled(false);
         prepareMedia();
         mediaPlayer.start();
         playCircle();
@@ -133,11 +132,11 @@ public class ListeningActivity extends AppCompatActivity {
         txtCurrent = (TextView) findViewById(R.id.txtCurrent);
         setTextview();
         //check answer
-        btnA = (Button)findViewById(R.id.btnA);
-        btnB = (Button)findViewById(R.id.btnB);
-        btnC = (Button)findViewById(R.id.btnC);
-        btnD = (Button)findViewById(R.id.btnD);
-        btnConfirm = (Button)findViewById(R.id.btnConfirm);
+        btnA = (Button) findViewById(R.id.btnA);
+        btnB = (Button) findViewById(R.id.btnB);
+        btnC = (Button) findViewById(R.id.btnC);
+        btnD = (Button) findViewById(R.id.btnD);
+        btnConfirm = (Button) findViewById(R.id.btnConfirm);
         btnConfirm.setEnabled(false);
         btnA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,7 +188,11 @@ public class ListeningActivity extends AppCompatActivity {
                     currentQues++;
                     indexQues++;
                     setTextview();
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                    }
                     prepareMedia();
+                    mediaPlayer.start();
                     btnConfirm.setEnabled(false);
                 } else {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
@@ -201,7 +204,7 @@ public class ListeningActivity extends AppCompatActivity {
         });
     }
 
-    private void playCircle(){
+    private void playCircle() {
         seekBar.setProgress(mediaPlayer.getCurrentPosition());
         if (mediaPlayer.isPlaying()) {
             runnable = new Runnable() {
@@ -221,7 +224,7 @@ public class ListeningActivity extends AppCompatActivity {
                 break;
             }
         }
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.test);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), listSong.get(position).getFile());
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         seekBar.setMax(mediaPlayer.getDuration());
     }
@@ -251,11 +254,14 @@ public class ListeningActivity extends AppCompatActivity {
     }
 
     private long calculateTime(int numQues) {
-        //get song list and sum of time
-        return 30000;
+        for (SongModel s : listSong) {
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), s.getFile());
+            time += mediaPlayer.getDuration();
+        }
+        return time;
     }
 
-    private void setTextview(){
+    private void setTextview() {
         txtCurrent.setText("Current: " + currentQues);
         txtQuestion.setText(listQuestion.get(indexQues).getQuestion()
                 + "\n" + listQuestion.get(indexQues).getAnswerA()
@@ -288,6 +294,7 @@ public class ListeningActivity extends AppCompatActivity {
             mediaPlayer.pause();
         } else {
             mediaPlayer.start();
+            playCircle();
         }
     }
 
@@ -307,6 +314,7 @@ public class ListeningActivity extends AppCompatActivity {
         intent.putExtra("finalScore", finalScore);
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
+        timer.cancel();
         startActivity(intent);
     }
 
