@@ -1,5 +1,6 @@
 package hciproject.datnh.englishquiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,36 +8,40 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
 import hciproject.datnh.englishquiz.listadapter.CustomAdapter;
 
 public class MyWordActivity extends AppCompatActivity {
     private ListView lvDictionary;
-    private TextView searchWord;
-    private TextView searchMeaning;
-
+    private SearchView editWord;
+    private EditText editMeaning;
+    private CustomAdapter customAdapter;
+    private ArrayList<WordQuizEntity> arrSearchWord = new ArrayList<>();
+    private ArrayList<WordQuizEntity> arrSearchMeaning = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_word);
         lvDictionary = (ListView) findViewById(R.id.lvDictionary);
-        ArrayList<WordQuizEntity> arrWord = new ArrayList<>();
-        ArrayList<WordQuizEntity> arrSearchWord = new ArrayList<>();
-        ArrayList<WordQuizEntity> arrSearchMeaning = new ArrayList<>();
-        
+        final ArrayList<WordQuizEntity> arrWord = new ArrayList<>();
+
+
         WordQuizEntity WordQuizEntity1 = new WordQuizEntity("Be","Là", "(v)");
         WordQuizEntity WordQuizEntity2 = new WordQuizEntity("Have","Có", "(v)");
         WordQuizEntity WordQuizEntity3 = new WordQuizEntity("Cat","Mèo", "(n)");
         WordQuizEntity WordQuizEntity4 = new WordQuizEntity("Dog","Chó", "(n)");
-        WordQuizEntity WordQuizEntity5 = new WordQuizEntity("Võ Duy Tính","01667 333 000", "(v)");
-        WordQuizEntity WordQuizEntity6 = new WordQuizEntity("Trần Văn Toàn","08 999 321", "(v)");
-        WordQuizEntity WordQuizEntity7 = new WordQuizEntity("Lại Thế Quang","01222 331 331", "(v)");
+        WordQuizEntity WordQuizEntity5 = new WordQuizEntity("Beautiful","Xinh đẹp", "(a)");
+        WordQuizEntity WordQuizEntity6 = new WordQuizEntity("Hot","Nóng", "(a)");
+        WordQuizEntity WordQuizEntity7 = new WordQuizEntity("Hat","Cái nón", "(n)");
 
         arrWord.add(WordQuizEntity1);
         arrWord.add(WordQuizEntity2);
@@ -46,26 +51,55 @@ public class MyWordActivity extends AppCompatActivity {
         arrWord.add(WordQuizEntity6);
         arrWord.add(WordQuizEntity7);
 
-        CustomAdapter customAdaper = new CustomAdapter(this,R.layout.list_word,arrWord);
-        lvDictionary.setAdapter(customAdaper);
-        searchWord = (TextView) findViewById(R.id.txtSearchWord);
-        searchWord.addTextChangedListener(new TextWatcher() {
+        customAdapter = new CustomAdapter(this,R.layout.list_word,arrWord);
+        lvDictionary.setAdapter(customAdapter);
 
-            @Override
-            public void afterTextChanged(Editable s) {}
+        editWord = (SearchView) findViewById(R.id.editWord);
+//        editWord.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start,
+//                                          int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start,
+//                                      int before, int count) {
+//                for (WordQuizEntity w:arrWord) {
+//                    if(w.getName().contains(s.toString())){
+//                        arrSearchWord.add(w);
+//                    }
+//                }
+//                customAdapter = new CustomAdapter(customAdapter.getContext(),R.layout.list_word,arrSearchWord);
+//                // t nghi là bị sai ở
+//                lvDictionary.setAdapter(customAdapter);
+//
+//            }
+//        });
 
+
+        editWord.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
+            public boolean onQueryTextSubmit(String s) {
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
+            public boolean onQueryTextChange(String s) {
+                customAdapter.getFilter().filter(s);
+                return false;
 
             }
         });
+
+
     }
+
 
     public void backToMenu(View view) {
         Intent intent = new Intent(MyWordActivity.this, MainActivity.class);

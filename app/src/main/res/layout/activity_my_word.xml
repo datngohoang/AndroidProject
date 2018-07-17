@@ -41,8 +41,9 @@
             android:background="#2BCCD7"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtSearchWord"
+            <SearchView
+                android:id="@+id/editWord"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="500dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="50dp"
@@ -50,15 +51,17 @@
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:hint="Search By Word"
-                android:padding="5dp" />
+                android:layout_gravity="center"
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/txtSearchMeaning"
+            <EditText
+                android:id="@+id/editMeaning"
                 android:layout_width="500dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
+                android:layout_gravity="center"
                 android:hint="Search By Meaning"
                 android:padding="5dp" />
         </LinearLayout>
