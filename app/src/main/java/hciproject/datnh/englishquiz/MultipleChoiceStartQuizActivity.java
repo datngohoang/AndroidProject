@@ -41,6 +41,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private int numQues;
     //    private String diff;
     private String onChosing = null;
+    private CountDownTimer timer;
     private List<MultipleChoiceQuizEntity> listQuestion;
 
     @Override
@@ -61,7 +62,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         //set time
         time = calculateTime(numQues);
         txtTimer = (TextView) findViewById(R.id.txtTimer);
-        CountDownTimer timer = new CountDownTimer(time, 1000) {
+        timer = new CountDownTimer(time, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -79,11 +80,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
-                finalScore = mScore + "/" + numQues;
-                intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
-                intent.putExtra("finalScore", finalScore);
-                startActivity(intent);
+                exitToResult();
             }
         }.start();
         //set textview question
@@ -220,6 +217,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         finalScore = mScore + "/" + numQues;
         intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
         intent.putExtra("finalScore", finalScore);
+        timer.cancel();
         startActivity(intent);
     }
 }

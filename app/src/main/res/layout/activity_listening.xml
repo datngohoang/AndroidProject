@@ -68,6 +68,7 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/btnPlay"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -80,7 +81,8 @@
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:progressBackgroundTint="@android:color/black" />
+                android:progressBackgroundTint="@android:color/black"
+                />
 
             <TextView
                 android:id="@+id/txtScore"
