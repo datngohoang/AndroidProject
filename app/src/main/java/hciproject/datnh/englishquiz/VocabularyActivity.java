@@ -208,7 +208,9 @@ public class VocabularyActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(VocabularyActivity.this, MainActivity.class);
+                        Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                        intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
+                        intent.putExtra("finalScore", score + "");
                         startActivity(intent);
                     }
                 })
