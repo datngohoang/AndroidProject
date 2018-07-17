@@ -35,10 +35,11 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private Button btnConfirm;
     private int mScore = 0;
     private String finalScore;
-    private int currentQues = 0;
+    private int indexQues = 0;
+    private int currentQues = 1;
     private long time;
     private int numQues;
-//    private String diff;
+    //    private String diff;
     private String onChosing = null;
     private List<MultipleChoiceQuizEntity> listQuestion;
 
@@ -135,14 +136,22 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentQues != numQues) {
-                    if (listQuestion.get(currentQues).getAnswer().equals(onChosing)) {
+                if (currentQues < numQues) {
+                    if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
                         mScore++;
-                        setTextview();
-                        btnConfirm.setEnabled(false);
-                        changeBgButton();
                     }
+                    btnA.setBackgroundResource(R.drawable.button_bg_round);
+                    btnB.setBackgroundResource(R.drawable.button_bg_round);
+                    btnC.setBackgroundResource(R.drawable.button_bg_round);
+                    btnD.setBackgroundResource(R.drawable.button_bg_round);
+                    currentQues++;
+                    indexQues++;
+                    setTextview();
+                    btnConfirm.setEnabled(false);
                 } else {
+                    if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
+                        mScore++;
+                    }
                     exitToResult();
                 }
             }
@@ -150,32 +159,26 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     }
 
     private void changeBgButton() {
-        if (onChosing.equals("a")) {
+        if (onChosing.equals("A")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnB.setBackgroundResource(R.drawable.button_bg_round);
             btnC.setBackgroundResource(R.drawable.button_bg_round);
             btnD.setBackgroundResource(R.drawable.button_bg_round);
-        } else if (onChosing.equals("b")) {
+        } else if (onChosing.equals("B")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round);
             btnB.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnC.setBackgroundResource(R.drawable.button_bg_round);
             btnD.setBackgroundResource(R.drawable.button_bg_round);
-        } else if (onChosing.equals("c")) {
+        } else if (onChosing.equals("C")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round);
             btnB.setBackgroundResource(R.drawable.button_bg_round);
             btnC.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnD.setBackgroundResource(R.drawable.button_bg_round);
-        } else if (onChosing.equals("d")) {
+        } else if (onChosing.equals("D")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round);
             btnB.setBackgroundResource(R.drawable.button_bg_round);
             btnC.setBackgroundResource(R.drawable.button_bg_round);
             btnD.setBackgroundResource(R.drawable.button_bg_round_chosen);
-        } else {
-            btnA.setBackgroundResource(R.drawable.button_bg_round);
-            btnB.setBackgroundResource(R.drawable.button_bg_round);
-            btnC.setBackgroundResource(R.drawable.button_bg_round);
-            btnC.setBackgroundResource(R.drawable.button_bg_round);
-            onChosing = null;
         }
     }
 
@@ -185,13 +188,12 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
 
     private void setTextview() {
         //dao
-        txtCurrent.setText("Current: " + (currentQues + 1));
-        txtQuestion.setText(listQuestion.get(currentQues).getQuestion()
-                + "\n" +listQuestion.get(currentQues).getAnswerA()
-                + "\n" + listQuestion.get(currentQues).getAnswerB()
-                + "\n" + listQuestion.get(currentQues).getAnswerC()
-                + "\n" + listQuestion.get(currentQues).getAnswerD());
-        currentQues++;
+        txtCurrent.setText("Current: " + currentQues);
+        txtQuestion.setText(listQuestion.get(indexQues).getQuestion()
+                + "\n" + listQuestion.get(indexQues).getAnswerA()
+                + "\n" + listQuestion.get(indexQues).getAnswerB()
+                + "\n" + listQuestion.get(indexQues).getAnswerC()
+                + "\n" + listQuestion.get(indexQues).getAnswerD());
     }
 
     public void backToMenu(View view) {

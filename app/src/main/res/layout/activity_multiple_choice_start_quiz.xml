@@ -125,12 +125,14 @@
                 app:srcCompat="@drawable/notebook" />
 
             <TextView
-                android:layout_width="310dp"
-                android:layout_height="224dp"
-                android:layout_marginTop="33dp"
-                android:layout_marginLeft="40dp"
+                android:id="@+id/txtQuestion"
+                android:layout_width="316dp"
+                android:layout_height="250dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
                 android:text=""
-                android:id="@+id/txtQuestion"/>
+                android:textSize="24dp" />
         </RelativeLayout>
 
         <LinearLayout
