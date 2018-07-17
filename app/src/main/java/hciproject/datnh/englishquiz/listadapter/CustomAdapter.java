@@ -40,7 +40,7 @@ public class CustomAdapter extends ArrayAdapter<WordQuizEntity>{
             viewHolder = (ViewHolder) convertView.getTag();
         }
         WordQuizEntity WordQuizEntity = word.get(position);
-        viewHolder.txtWord.setText(WordQuizEntity.getWord());
+        viewHolder.txtWord.setText(WordQuizEntity.getName());
         viewHolder.txtMean.setText(WordQuizEntity.getMeaning());
         viewHolder.txtType.setText(WordQuizEntity.getType());
         return convertView;

@@ -32,13 +32,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#2BCCD7"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ListView
-        android:id="@+id/lvDictionary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2BCCD7"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/txtSearchWord"
+                android:layout_width="500dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:hint="Search By Word"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/txtSearchMeaning"
+                android:layout_width="500dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:hint="Search By Meaning"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2BCCD7"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/lvDictionary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
