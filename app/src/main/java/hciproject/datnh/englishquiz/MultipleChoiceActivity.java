@@ -72,9 +72,10 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 intent.putExtra("numQues", numQues);
-                intent.putExtra("diff", diff);
+//                intent.putExtra("diff", diff);
                 //get data
-                MultipleChoiceQuizModel model = ApiConnector.callMultipleChoiceApi(numQues, 1);
+                //first param is diff, 2nd is quantity
+                MultipleChoiceQuizModel model = ApiConnector.callMultipleChoiceApi(changeDiffToDiffInt(diff), numQues);
                 String json = (new Gson()).toJson(model);
                 intent.putExtra("model", json);
                 startActivity(intent);
@@ -82,5 +83,15 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         };
 
         return runnable;
+    }
+
+    private int changeDiffToDiffInt(String diff) {
+        if (diff.equals("Easy")) {
+            return 1;
+        } else if (diff.equals("Normal")) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 }

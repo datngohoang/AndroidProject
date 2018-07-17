@@ -15,6 +15,10 @@ import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hciproject.datnh.englishquiz.entity.MultipleChoiceQuizEntity;
 import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 
 public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
@@ -23,6 +27,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private TextView txtQuestion;
     private TextView txtTimer;
     private TextView txtCurrent;
+    private TextView txtTotal;
     private Button btnA;
     private Button btnB;
     private Button btnC;
@@ -33,8 +38,9 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private int currentQues = 0;
     private long time;
     private int numQues;
-    private String diff;
-    private String onChosing;
+//    private String diff;
+    private String onChosing = null;
+    private List<MultipleChoiceQuizEntity> listQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,27 +48,26 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_multiple_choice_start_quiz);
         //get num of ques and difficulty
         numQues = getIntent().getExtras().getInt("numQues");//5, 10, 20, 40
-        diff = getIntent().getExtras().getString("diff");//Easy, Normal, Hard
+//        diff = getIntent().getExtras().getString("diff");//Easy, Normal, Hard
         //get json
         String json = getIntent().getExtras().getString("model");
         MultipleChoiceQuizModel model = (new Gson()).fromJson(json, MultipleChoiceQuizModel.class);
-        System.out.println(model.getDifficult());
-        System.out.println(model.getQuestions().size());
-
+        listQuestion = new ArrayList<>();
+        listQuestion.addAll(model.getQuestions());
         //set total
-        txtQuestion = (TextView) findViewById(R.id.txtTotal);
-        txtQuestion.setText("Total: " + numQues);
+        txtTotal = (TextView) findViewById(R.id.txtTotal);
+        txtTotal.setText("Total: " + numQues);
         //set time
         time = calculateTime(numQues);
-        txtTimer = (TextView)findViewById(R.id.txtTimer);
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
         CountDownTimer timer = new CountDownTimer(time, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 time = millisUntilFinished;
                 //Update txtTimer
-                int mins = (int)time / 60000;
-                int seconds = (int)time % 60000 / 1000;
+                int mins = (int) time / 60000;
+                int seconds = (int) time % 60000 / 1000;
                 String timeLeftText;
                 timeLeftText = "" + mins;
                 timeLeftText += ":";
@@ -82,21 +87,21 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         }.start();
         //set textview question
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
-        txtCurrent = (TextView) findViewById(R.id.txtCurrent); 
+        txtCurrent = (TextView) findViewById(R.id.txtCurrent);
         setTextview();
         //check answer
-        btnA = (Button)findViewById(R.id.btnA);
-        btnB = (Button)findViewById(R.id.btnB);
-        btnC = (Button)findViewById(R.id.btnC);
-        btnD = (Button)findViewById(R.id.btnD);
-        btnConfirm = (Button)findViewById(R.id.btnConfirm);
+        btnA = (Button) findViewById(R.id.btnA);
+        btnB = (Button) findViewById(R.id.btnB);
+        btnC = (Button) findViewById(R.id.btnC);
+        btnD = (Button) findViewById(R.id.btnD);
+        btnConfirm = (Button) findViewById(R.id.btnConfirm);
         btnConfirm.setEnabled(false);
         btnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //change color
-                onChosing = "a";
-                changeBgButton(onChosing);
+                onChosing = "A";
+                changeBgButton();
                 btnConfirm.setEnabled(true);
             }
         });
@@ -104,8 +109,8 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //change color
-                onChosing = "b";
-                changeBgButton(onChosing);
+                onChosing = "B";
+                changeBgButton();
                 btnConfirm.setEnabled(true);
             }
         });
@@ -113,8 +118,8 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //change color
-                onChosing = "c";
-                changeBgButton(onChosing);
+                onChosing = "C";
+                changeBgButton();
                 btnConfirm.setEnabled(true);
             }
         });
@@ -122,42 +127,55 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //change color
-                onChosing = "d";
-                changeBgButton(onChosing);
+                onChosing = "D";
+                changeBgButton();
                 btnConfirm.setEnabled(true);
             }
         });
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dao
-                //boolean = dao.checkMultipleResult();
-                //mScore++;
+                if (currentQues != numQues) {
+                    if (listQuestion.get(currentQues).getAnswer().equals(onChosing)) {
+                        mScore++;
+                        setTextview();
+                        btnConfirm.setEnabled(false);
+                        changeBgButton();
+                    }
+                } else {
+                    exitToResult();
+                }
             }
         });
     }
 
-    private void changeBgButton(String choice) {
-        if (choice.equals("a")) {
+    private void changeBgButton() {
+        if (onChosing.equals("a")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnB.setBackgroundResource(R.drawable.button_bg_round);
             btnC.setBackgroundResource(R.drawable.button_bg_round);
             btnD.setBackgroundResource(R.drawable.button_bg_round);
-        } else if (choice.equals("b")) {
+        } else if (onChosing.equals("b")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round);
             btnB.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnC.setBackgroundResource(R.drawable.button_bg_round);
             btnD.setBackgroundResource(R.drawable.button_bg_round);
-        } else if (choice.equals("c")) {
+        } else if (onChosing.equals("c")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round);
             btnB.setBackgroundResource(R.drawable.button_bg_round);
             btnC.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnD.setBackgroundResource(R.drawable.button_bg_round);
-        } else if (choice.equals("d")) {
+        } else if (onChosing.equals("d")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round);
             btnB.setBackgroundResource(R.drawable.button_bg_round);
             btnC.setBackgroundResource(R.drawable.button_bg_round);
             btnD.setBackgroundResource(R.drawable.button_bg_round_chosen);
+        } else {
+            btnA.setBackgroundResource(R.drawable.button_bg_round);
+            btnB.setBackgroundResource(R.drawable.button_bg_round);
+            btnC.setBackgroundResource(R.drawable.button_bg_round);
+            btnC.setBackgroundResource(R.drawable.button_bg_round);
+            onChosing = null;
         }
     }
 
@@ -165,11 +183,15 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         return numQues * 60 * 1000;
     }
 
-    private void setTextview(){
-        currentQues++;
+    private void setTextview() {
         //dao
-        //get and set ques
-        txtCurrent.setText("Current: " + currentQues);
+        txtCurrent.setText("Current: " + (currentQues + 1));
+        txtQuestion.setText(listQuestion.get(currentQues).getQuestion()
+                + "\n" +listQuestion.get(currentQues).getAnswerA()
+                + "\n" + listQuestion.get(currentQues).getAnswerB()
+                + "\n" + listQuestion.get(currentQues).getAnswerC()
+                + "\n" + listQuestion.get(currentQues).getAnswerD());
+        currentQues++;
     }
 
     public void backToMenu(View view) {
@@ -179,11 +201,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
-                        finalScore = mScore + "/" + numQues;
-                        intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
-                        intent.putExtra("finalScore", finalScore);
-                        startActivity(intent);
+                        exitToResult();
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -193,5 +211,13 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void exitToResult() {
+        Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
+        finalScore = mScore + "/" + numQues;
+        intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
+        intent.putExtra("finalScore", finalScore);
+        startActivity(intent);
     }
 }
