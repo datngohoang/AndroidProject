@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import hciproject.datnh.englishquiz.communicator.ApiConnector;
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
+import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 import hciproject.datnh.englishquiz.model.WordQuizModel;
 
 public class VocabularyActivity extends AppCompatActivity {
@@ -31,39 +34,15 @@ public class VocabularyActivity extends AppCompatActivity {
     private long time;
     private TextView txtTimer;
     private String[] listQuestion;
+    private CountDownTimer timer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vocabulary);
         showWord = (TextView) findViewById(R.id.txtShowWord);
-        showWord.setText(blankWord);
-        //set time
         time = 60 * 1000;
         txtTimer = (TextView)findViewById(R.id.txtTimer);
-        CountDownTimer timer = new CountDownTimer(time, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                time = millisUntilFinished;
-                //Update txtTimer
-                int mins = (int)time / 60000;
-                int seconds = (int)time % 60000 / 1000;
-                String timeLeftText;
-                timeLeftText = "" + mins;
-                timeLeftText += ":";
-                if (seconds < 10) timeLeftText += "0";
-                timeLeftText += seconds;
-                txtTimer.setText(timeLeftText);
-            }
-
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
-                intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
-                intent.putExtra("finalScore", score + "");
-                startActivity(intent);
-            }
-        }.start();
         for (char i = 65; i < 91; i++) {
             String name = (String) "btn" + i;
             int id = getResources().getIdentifier(name, "id", this.getPackageName());
@@ -73,11 +52,76 @@ public class VocabularyActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     fillInWord((Button) v);
-                    invisibleButton((Button) v);
                     fillWord = "";
                 }
             });
         }
+        //Call api
+        Runnable r = createWordRunnable();
+        Thread t = new Thread(r);
+        t.start();
+    }
+
+    private Runnable createWordRunnable() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                //get data
+                WordQuizEntity entity = ApiConnector.callWordApi();
+                setUp(entity);
+                setUpTimer();
+            }
+        };
+        return runnable;
+    }
+
+    public void setUpTimer() {
+        if (timer == null) {
+            //setup timer
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    timer = new CountDownTimer(time, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            time = millisUntilFinished;
+                            //Update txtTimer
+                            int mins = (int)time / 60000;
+                            int seconds = (int)time % 60000 / 1000;
+                            String timeLeftText;
+                            timeLeftText = "" + mins;
+                            timeLeftText += ":";
+                            if (seconds < 10) timeLeftText += "0";
+                            timeLeftText += seconds;
+                            txtTimer.setText(timeLeftText);
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                            intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
+                            intent.putExtra("finalScore", score + "");
+                            startActivity(intent);
+                        }
+                    }.start();
+                }
+            });
+        } else {
+            timer.start();
+        }
+    }
+
+    public void setUp(WordQuizEntity entity) {
+        final WordQuizEntity entity1 = entity;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //Set up word
+                word = entity1.getWord();
+                blankWord = entity1.getBlankWord();
+                showWord.setText(blankWord);
+            }
+        });
     }
 
     public void invisibleButton(Button button) {
@@ -87,6 +131,7 @@ public class VocabularyActivity extends AppCompatActivity {
     //Dien chu vao TEXTVIEW
     public void fillInWord(Button btnWord) {
         //tach chuoi
+        fillWord = "";
         words = word.split("\\s");
         blankWords = blankWord.split("\\s");
         String letter = (String) btnWord.getText();
@@ -97,7 +142,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 blankWords[i] = letter;
             }
         }
-        //TODO: Gắn chuỗi String thành String
+        // Gắn chuỗi String thành String
         for (int i = 0; i < blankWords.length; i++) {
             if (i == blankWords.length - 1) {
                 fillWord += blankWords[i];
@@ -108,37 +153,42 @@ public class VocabularyActivity extends AppCompatActivity {
         blankWord = fillWord;
         if (checkRight) {
             if (blankWord.equals(word)) {
-                //TODO: cộng score, chuyển sang câu tiếp theo
+                //cộng score, chuyển sang câu tiếp theo
                 score = score + 10;
                 TextView txtScore = (TextView) findViewById(R.id.txtScore);
-                txtScore.setText(score);
+                txtScore.setText(score + "");
                 goToNextQuestion();
+            } else {
+                invisibleButton(btnWord);
             }
         } else {
             if (countFail == 1) {
-                //TODO: Fail còn 1, Chuyển sang trang result
+                //Fail còn 1, Chuyển sang trang result
                 Intent intent = new Intent(this, ResultActivity.class);
                 intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
                 intent.putExtra("finalScore", score + "");
                 startActivity(intent);
-
             } else {
-                //TODO Fail < 5, sai -1
+                //Fail < 5, sai -1
                 countFail = countFail - 1;
                 showFail = (TextView) findViewById(R.id.txtCountFail);
                 showFail.setText(countFail + "");
             }
+            invisibleButton(btnWord);
         }
-
-        //TODO: Set Text
+        // Set Text
         showWord = (TextView) findViewById(R.id.txtShowWord);
         showWord.setText(fillWord);
         checkRight = false;
     }
 
     public void goToNextQuestion() {
-        //TODO: hiển thị câu hỏi tiếp theo trên TextView
-
+        timer.cancel();
+        showAgainButton();
+        //Call api
+        Runnable r = createWordRunnable();
+        Thread t = new Thread(r);
+        t.start();
     }
 
     public void showAgainButton() {
@@ -148,12 +198,7 @@ public class VocabularyActivity extends AppCompatActivity {
             int id = getResources().getIdentifier(name, "id", this.getPackageName());
             btnWord = (Button) findViewById(id);
             btnWord.setVisibility(View.VISIBLE);
-
         }
-    }
-
-    public void getListQuestion(){
-
     }
 
     public void backToMenu(View view) {
@@ -163,7 +208,9 @@ public class VocabularyActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(VocabularyActivity.this, MainActivity.class);
+                        Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                        intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
+                        intent.putExtra("finalScore", score + "");
                         startActivity(intent);
                     }
                 })
@@ -173,6 +220,6 @@ public class VocabularyActivity extends AppCompatActivity {
 
                     }
                 })
-                .show();
+        .show();
     }
 }

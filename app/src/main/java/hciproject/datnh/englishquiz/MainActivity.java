@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.gson.Gson;
+
 import hciproject.datnh.englishquiz.communicator.ApiConnector;
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
+import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 
 public class MainActivity extends AppCompatActivity {
     //test commit
@@ -35,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToMyWord(View view) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                WordQuizEntity entity = ApiConnector.callWordApi();
-            }
-        });
-
-
         Intent intent = new Intent(MainActivity.this, MyWordActivity.class);
         startActivity(intent);
     }
@@ -50,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     public void goToListening(View view) {
         Intent intent = new Intent(MainActivity.this, MultipleChoiceActivity.class);
         intent.putExtra("fromActivity", FROMLISTEN);
-
         startActivity(intent);
     }
 
