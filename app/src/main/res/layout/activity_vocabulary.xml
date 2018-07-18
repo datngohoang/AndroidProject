@@ -55,8 +55,15 @@
                 app:srcCompat="@drawable/countdown" />
 
             <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
                 android:id="@+id/txtTimer"
-                android:layout_width="64dp"
+                android:layout_width="95dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -66,15 +73,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="64dp"
-                android:layout_weight="1"
-                android:gravity="center" />
-
-            <TextView
                 android:id="@+id/txtCountFail"
-                android:layout_width="343dp"
+                android:layout_width="283dp"
                 android:layout_height="64dp"
                 android:gravity="center"
                 android:text="5"
@@ -92,7 +92,7 @@
 
             <TextView
                 android:id="@+id/txtScore"
-                android:layout_width="50dp"
+                android:layout_width="75dp"
                 android:layout_height="64dp"
                 android:gravity="center"
                 android:text="0"
