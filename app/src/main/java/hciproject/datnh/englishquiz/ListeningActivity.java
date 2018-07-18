@@ -25,6 +25,7 @@ import java.util.List;
 import hciproject.datnh.englishquiz.entity.ListeningQuizEntity;
 import hciproject.datnh.englishquiz.model.ListeningQuizModel;
 import hciproject.datnh.englishquiz.model.SongModel;
+import hciproject.datnh.englishquiz.storage.ScoreStorage;
 
 public class ListeningActivity extends AppCompatActivity {
 
@@ -55,6 +56,7 @@ public class ListeningActivity extends AppCompatActivity {
     private ArrayList<SongModel> listSong;
     private int position = 0;
     private CountDownTimer timer;
+    private int difficult = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,9 @@ public class ListeningActivity extends AppCompatActivity {
         ListeningQuizModel model = (new Gson()).fromJson(json, ListeningQuizModel.class);
         listQuestion = new ArrayList<>();
         listQuestion.addAll(model.getQuestions());
+        if (model.getQuestions().size() > 0) {
+            difficult = model.getQuestions().get(0).getDifficult();
+        }
         System.out.println("Questions Music: " + listQuestion.size());
         //addSongList
         addSongList();
@@ -264,10 +269,10 @@ public class ListeningActivity extends AppCompatActivity {
     private void setTextview() {
         txtCurrent.setText("Current: " + currentQues);
         txtQuestion.setText(listQuestion.get(indexQues).getQuestion()
-                + "\n" + listQuestion.get(indexQues).getAnswerA()
-                + "\n" + listQuestion.get(indexQues).getAnswerB()
-                + "\n" + listQuestion.get(indexQues).getAnswerC()
-                + "\n" + listQuestion.get(indexQues).getAnswerD());
+                + "\nA. " + listQuestion.get(indexQues).getAnswerA()
+                + "\nB. " + listQuestion.get(indexQues).getAnswerB()
+                + "\nC. " + listQuestion.get(indexQues).getAnswerC()
+                + "\nD. " + listQuestion.get(indexQues).getAnswerD());
     }
 
     public void backToMenu(View view) {
@@ -310,7 +315,10 @@ public class ListeningActivity extends AppCompatActivity {
 
     private void exitToResult() {
         Intent intent = new Intent(ListeningActivity.this, ResultActivity.class);
-        finalScore = mScore + "/" + numQues;
+        //Set score
+        ScoreStorage scoreStorage = new ScoreStorage(this);
+        scoreStorage.setValue(ScoreStorage.NAMES[1], mScore * difficult);
+        finalScore = mScore * difficult + "";
         intent.putExtra("finalScore", finalScore);
         mediaPlayer.release();
         handler.removeCallbacks(runnable);

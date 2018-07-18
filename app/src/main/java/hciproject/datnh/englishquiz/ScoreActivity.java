@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import hciproject.datnh.englishquiz.storage.ScoreStorage;
+
 public class ScoreActivity extends AppCompatActivity {
     private TextView txtScoreTitle;
     private TextView txtScore;
@@ -15,6 +17,7 @@ public class ScoreActivity extends AppCompatActivity {
     private ImageView quizImgView;
     private ImageView listeningImgView;
     private ImageView vocabularyImgView;
+    private ScoreStorage scoreStorage = new ScoreStorage(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class ScoreActivity extends AppCompatActivity {
         quizImgView = (ImageView) findViewById(R.id.txtQuizScore);
         listeningImgView = (ImageView) findViewById(R.id.txtListenScore);
         vocabularyImgView = (ImageView) findViewById(R.id.txtVocaScore);
+
         listeningImgView.performClick();
     }
 
@@ -51,9 +55,9 @@ public class ScoreActivity extends AppCompatActivity {
         listeningImgView.setBackgroundColor(Color.TRANSPARENT);
         vocabularyImgView.setBackgroundColor(Color.TRANSPARENT);
         txtScore = (TextView) findViewById(R.id.txtScore);
-        String score = "100\n" +
-                "50\n" +
-                "1250\n";
+        String score = scoreStorage.getValue(ScoreStorage.NAMES[0], scoreStorage.SCORES[0]) + "\n" +
+                scoreStorage.getValue(ScoreStorage.NAMES[0], scoreStorage.SCORES[1]) + "\n" +
+                scoreStorage.getValue(ScoreStorage.NAMES[0], scoreStorage.SCORES[2]) + "\n";
         txtScore.setText(score);
     }
 
@@ -62,9 +66,9 @@ public class ScoreActivity extends AppCompatActivity {
         listeningImgView.setBackgroundColor(Color.BLUE);
         vocabularyImgView.setBackgroundColor(Color.TRANSPARENT);
         txtScore = (TextView) findViewById(R.id.txtScore);
-        String score = "60\n" +
-                "50\n" +
-                "1000\n";
+        String score = scoreStorage.getValue(ScoreStorage.NAMES[1], scoreStorage.SCORES[0]) + "\n" +
+                scoreStorage.getValue(ScoreStorage.NAMES[1], scoreStorage.SCORES[1]) + "\n" +
+                scoreStorage.getValue(ScoreStorage.NAMES[1], scoreStorage.SCORES[2]) + "\n";
         txtScore.setText(score);
     }
 
@@ -73,9 +77,9 @@ public class ScoreActivity extends AppCompatActivity {
         listeningImgView.setBackgroundColor(Color.TRANSPARENT);
         vocabularyImgView.setBackgroundColor(Color.BLUE);
         txtScore = (TextView) findViewById(R.id.txtScore);
-        String score = "30\n" +
-                "10\n" +
-                "750\n";
+        String score = scoreStorage.getValue(ScoreStorage.NAMES[2], scoreStorage.SCORES[0]) + "\n" +
+                scoreStorage.getValue(ScoreStorage.NAMES[2], scoreStorage.SCORES[1]) + "\n" +
+                scoreStorage.getValue(ScoreStorage.NAMES[2], scoreStorage.SCORES[2]) + "\n";
         txtScore.setText(score);
     }
 }

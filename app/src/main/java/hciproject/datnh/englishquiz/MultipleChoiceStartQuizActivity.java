@@ -20,6 +20,7 @@ import java.util.List;
 
 import hciproject.datnh.englishquiz.entity.MultipleChoiceQuizEntity;
 import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
+import hciproject.datnh.englishquiz.storage.ScoreStorage;
 
 public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     public static final int SCORE_FROM_QUIZ = 0;
@@ -43,6 +44,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private String onChosing = null;
     private CountDownTimer timer;
     private List<MultipleChoiceQuizEntity> listQuestion;
+    private int difficult = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
         MultipleChoiceQuizModel model = (new Gson()).fromJson(json, MultipleChoiceQuizModel.class);
         listQuestion = new ArrayList<>();
         listQuestion.addAll(model.getQuestions());
+        if (model.getQuestions().size() > 0) {
+            difficult = model.getQuestions().get(0).getDifficult();
+        }
         //set total
         txtTotal = (TextView) findViewById(R.id.txtTotal);
         txtTotal.setText("Total: " + numQues);
@@ -214,7 +219,10 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
 
     private void exitToResult() {
         Intent intent = new Intent(MultipleChoiceStartQuizActivity.this, ResultActivity.class);
-        finalScore = mScore + "/" + numQues;
+        //Set score
+        ScoreStorage scoreStorage = new ScoreStorage(this);
+        scoreStorage.setValue(ScoreStorage.NAMES[0], mScore * difficult);
+        finalScore = mScore * difficult + "";
         intent.putExtra("scoreFromIntent", SCORE_FROM_QUIZ);
         intent.putExtra("finalScore", finalScore);
         timer.cancel();

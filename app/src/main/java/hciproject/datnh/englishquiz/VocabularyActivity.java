@@ -16,6 +16,7 @@ import hciproject.datnh.englishquiz.communicator.ApiConnector;
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
 import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 import hciproject.datnh.englishquiz.model.WordQuizModel;
+import hciproject.datnh.englishquiz.storage.ScoreStorage;
 
 public class VocabularyActivity extends AppCompatActivity {
     public static final int SCORE_FROM_VOCABULARY = 2;
@@ -99,6 +100,9 @@ public class VocabularyActivity extends AppCompatActivity {
                         @Override
                         public void onFinish() {
                             Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                            //Set score
+                            ScoreStorage scoreStorage = new ScoreStorage(VocabularyActivity.this);
+                            scoreStorage.setValue(ScoreStorage.NAMES[2], score);
                             intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
                             intent.putExtra("finalScore", score + "");
                             startActivity(intent);
@@ -165,8 +169,12 @@ public class VocabularyActivity extends AppCompatActivity {
             if (countFail == 1) {
                 //Fail còn 1, Chuyển sang trang result
                 Intent intent = new Intent(this, ResultActivity.class);
+                //Set score
+                ScoreStorage scoreStorage = new ScoreStorage(this);
+                scoreStorage.setValue(ScoreStorage.NAMES[2], score);
                 intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
                 intent.putExtra("finalScore", score + "");
+                timer.cancel();
                 startActivity(intent);
             } else {
                 //Fail < 5, sai -1
@@ -209,6 +217,9 @@ public class VocabularyActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                        //Set score
+                        ScoreStorage scoreStorage = new ScoreStorage(VocabularyActivity.this);
+                        scoreStorage.setValue(ScoreStorage.NAMES[2], score);
                         intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
                         intent.putExtra("finalScore", score + "");
                         startActivity(intent);
