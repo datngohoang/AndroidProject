@@ -64,7 +64,7 @@
                 android:paddingBottom="10dp"
                 android:text="60"
                 android:textColor="#ffffff"
-                android:textSize="30dp"
+                android:textSize="28dp"
                 android:textStyle="bold" />
 
             <ImageView
