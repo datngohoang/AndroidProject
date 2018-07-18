@@ -185,20 +185,23 @@ public class ListeningActivity extends AppCompatActivity {
                 if (currentQues < numQues) {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
                         mScore++;
+                        txtScore.setText("" + mScore);
+                        btnA.setBackgroundResource(R.drawable.button_bg_round);
+                        btnB.setBackgroundResource(R.drawable.button_bg_round);
+                        btnC.setBackgroundResource(R.drawable.button_bg_round);
+                        btnD.setBackgroundResource(R.drawable.button_bg_round);
+                        currentQues++;
+                        indexQues++;
+                        setTextview();
+                        if (mediaPlayer.isPlaying()) {
+                            mediaPlayer.stop();
+                        }
+                        prepareMedia();
+                        mediaPlayer.start();
+                        btnConfirm.setEnabled(false);
+                    } else {
+                        exitToResult();
                     }
-                    btnA.setBackgroundResource(R.drawable.button_bg_round);
-                    btnB.setBackgroundResource(R.drawable.button_bg_round);
-                    btnC.setBackgroundResource(R.drawable.button_bg_round);
-                    btnD.setBackgroundResource(R.drawable.button_bg_round);
-                    currentQues++;
-                    indexQues++;
-                    setTextview();
-                    if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.stop();
-                    }
-                    prepareMedia();
-                    mediaPlayer.start();
-                    btnConfirm.setEnabled(false);
                 } else {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
                         mScore++;
@@ -260,8 +263,12 @@ public class ListeningActivity extends AppCompatActivity {
 
     private long calculateTime(int numQues) {
         for (SongModel s : listSong) {
-            mediaPlayer = MediaPlayer.create(getApplicationContext(), s.getFile());
-            time += mediaPlayer.getDuration();
+            for (ListeningQuizEntity l : listQuestion) {
+                if (s.getTitle().equals(l.getFilename())) {
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), s.getFile());
+                    time += (mediaPlayer.getDuration() + 10 * 1000);
+                }
+            }
         }
         return time;
     }
