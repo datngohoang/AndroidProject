@@ -111,7 +111,6 @@
 
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Vocab_ _ _ry"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="40dp"

@@ -126,8 +126,10 @@ public class VocabularyActivity extends AppCompatActivity {
                 //Set up word
                 word = entity1.getWord();
                 blankWord = entity1.getBlankWord();
+
 //                //pause
 //                SystemClock.sleep(1500);
+
                 showWord.setText(blankWord);
             }
         });
@@ -170,6 +172,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 showWord.setText(word);
                 //pause
                 SystemClock.sleep(1500);
+
                 goToNextQuestion();
 
             } else {
@@ -180,7 +183,9 @@ public class VocabularyActivity extends AppCompatActivity {
                 //Fail còn 1, Chuyển sang trang result
                 showWord = (TextView) findViewById(R.id.txtShowWord);
                 showWord.setText(word);
+
                 //pause
+                SystemClock.sleep(1500);
                 SystemClock.sleep(1500);
 
                 Intent intent = new Intent(this, ResultActivity.class);
@@ -189,7 +194,9 @@ public class VocabularyActivity extends AppCompatActivity {
                 scoreStorage.setValue(ScoreStorage.NAMES[2], score);
                 intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
                 intent.putExtra("finalScore", score + "");
+
                 timer.cancel();
+
                 startActivity(intent);
             } else {
                 //Fail < 5, sai -1
@@ -202,9 +209,11 @@ public class VocabularyActivity extends AppCompatActivity {
         showWord = (TextView) findViewById(R.id.txtShowWord);
         showWord.setText(fillWord);
         checkRight = false;
+
     }
 
     public void goToNextQuestion() {
+        SystemClock.sleep(500);
         timer.cancel();
         showAgainButton();
         //Call api

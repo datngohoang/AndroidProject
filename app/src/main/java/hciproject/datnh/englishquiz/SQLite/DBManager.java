@@ -42,18 +42,29 @@ public class DBManager extends SQLiteOpenHelper{
         Toast.makeText(context, "Drop successfylly", Toast.LENGTH_SHORT).show();
     }
 
-    //Add new a word
-    public void addStudent(WordQuizEntity student){
+    //Add new a 
+    public void addword(WordQuizEntity word){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(NAME, student.getName());
-        values.put(MEANING, student.getMeaning());
-        values.put(TYPE, student.getType());
+        values.put(NAME, word.getName());
+        values.put(MEANING, word.getMeaning());
+        values.put(TYPE, word.getType());
         //Neu de null thi khi value bang null thi loi
 
         db.insert(TABLE_NAME,null,values);
 
         db.close();
+    }
+
+    public int Update(WordQuizEntity word){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(NAME,word.getName());
+
+        return db.update(TABLE_NAME,values,ID +"=?",new String[] { String.valueOf(word.getId())});
+
+
     }
 
 }
