@@ -14,6 +14,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
@@ -50,7 +52,12 @@ public class MyWordActivity extends AppCompatActivity {
         arrWord.add(WordQuizEntity5);
         arrWord.add(WordQuizEntity6);
         arrWord.add(WordQuizEntity7);
-
+        Collections.sort(arrWord, new Comparator<WordQuizEntity>() {
+            @Override
+            public int compare(WordQuizEntity w1, WordQuizEntity w2) {
+                return w1.getName().compareTo(w2.getName());
+            }
+        });
         customAdapter = new CustomAdapter(this,R.layout.list_word,arrWord);
         lvDictionary.setAdapter(customAdapter);
 

@@ -44,26 +44,16 @@
             <SearchView
                 android:id="@+id/editWord"
                 style="@style/Widget.AppCompat.AutoCompleteTextView"
-                android:layout_width="500dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:hint="Search By Word"
-                android:layout_gravity="center"
-                android:textSize="18sp" />
+                android:textSize="22dp" />
 
-            <EditText
-                android:id="@+id/editMeaning"
-                android:layout_width="500dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_weight="1"
-                android:background="#FFFFFF"
-                android:layout_gravity="center"
-                android:hint="Search By Meaning"
-                android:padding="5dp" />
         </LinearLayout>
 
         <LinearLayout

@@ -64,7 +64,11 @@
                 android:paddingBottom="10dp"
                 android:text="60"
                 android:textColor="#ffffff"
+<<<<<<< Updated upstream
                 android:textSize="28dp"
+=======
+                android:textSize="25dp"
+>>>>>>> Stashed changes
                 android:textStyle="bold" />
 
             <ImageView
