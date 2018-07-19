@@ -134,6 +134,8 @@ public class FakeController {
                 "U S A B I L I T Y", "E F F E C T I V E N E S S"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
                 "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S"};
+        String[] meaning = {"Từ vựng", "Nhà Máy", "HIệu quả",
+                "Độ sử dụng", "Hiệu suất"};
 
         Random random = new Random();
         int n = random.nextInt(5);
@@ -141,6 +143,8 @@ public class FakeController {
         entity.setId(n);
         entity.setWord(word[n]);
         entity.setBlankWord(blankWord[n]);
+        entity.setMeaning(meaning[n]);
+        entity.setType("n");
 
         result = (new Gson()).toJson(entity);
 

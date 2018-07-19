@@ -40,6 +40,7 @@ public class VocabularyActivity extends AppCompatActivity {
     private String[] listQuestion;
     private CountDownTimer timer = null;
     private int flagFirstIn = 0;
+    private WordQuizEntity crrWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class VocabularyActivity extends AppCompatActivity {
             public void run() {
                 //get data
                 WordQuizEntity entity = ApiConnector.callWordApi();
+                crrWord = entity;
                 setUp(entity);
                 setUpTimer();
                 flagFirstIn = 1;
@@ -179,19 +181,29 @@ public class VocabularyActivity extends AppCompatActivity {
             }
         } else {
             if (countFail == 1) {
-                //Fail còn 1, Chuyển sang trang result
-                showWord = (TextView) findViewById(R.id.txtShowWord);
-                showWord.setText(word);
-                Intent intent = new Intent(this, ResultActivity.class);
-                //Set score
-                ScoreStorage scoreStorage = new ScoreStorage(this);
-                scoreStorage.setValue(ScoreStorage.NAMES[2], score);
-                intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
-                intent.putExtra("finalScore", score + "");
-
                 timer.cancel();
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setTitle("You lose")
+                        .setMessage("Answer: " + crrWord.getName() + "\n" + "Type: (" + crrWord.getType() + ")"
+                        + "\n" + "Meaning: " + crrWord.getMeaning())
+                        .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Fail còn 1, Chuyển sang trang result
+                                showWord = (TextView) findViewById(R.id.txtShowWord);
+                                showWord.setText(word);
+                                Intent intent = new Intent(VocabularyActivity.this, ResultActivity.class);
+                                //Set score
+                                ScoreStorage scoreStorage = new ScoreStorage(VocabularyActivity.this);
+                                scoreStorage.setValue(ScoreStorage.NAMES[2], score);
+                                intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
+                                intent.putExtra("finalScore", score + "");
 
-                startActivity(intent);
+                                timer.cancel();
+
+                                startActivity(intent);
+                            }
+                        }).show();
             } else {
                 //Fail < 5, sai -1
                 countFail = countFail - 1;
