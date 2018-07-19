@@ -45,6 +45,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private List<MultipleChoiceQuizEntity> listQuestion;
     private int difficult = 1;
+    private Handler handlerAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //change color
                 onChosing = "A";
-                changeBgButton();
+                changeBgButton(onChosing);
                 btnConfirm.setEnabled(true);
             }
         });
@@ -113,7 +114,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //change color
                 onChosing = "B";
-                changeBgButton();
+                changeBgButton(onChosing);
                 btnConfirm.setEnabled(true);
             }
         });
@@ -122,7 +123,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //change color
                 onChosing = "C";
-                changeBgButton();
+                changeBgButton(onChosing);
                 btnConfirm.setEnabled(true);
             }
         });
@@ -131,7 +132,7 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //change color
                 onChosing = "D";
-                changeBgButton();
+                changeBgButton(onChosing);
                 btnConfirm.setEnabled(true);
             }
         });
@@ -142,25 +143,51 @@ public class MultipleChoiceStartQuizActivity extends AppCompatActivity {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
                         mScore++;
                     }
-                    btnA.setBackgroundResource(R.drawable.button_bg_round);
-                    btnB.setBackgroundResource(R.drawable.button_bg_round);
-                    btnC.setBackgroundResource(R.drawable.button_bg_round);
-                    btnD.setBackgroundResource(R.drawable.button_bg_round);
-                    currentQues++;
-                    indexQues++;
-                    setTextview();
-                    btnConfirm.setEnabled(false);
+                    showRightAnswer();
+                    handlerAnswer = new Handler();
+                    handlerAnswer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            btnA.setBackgroundResource(R.drawable.button_bg_round);
+                            btnB.setBackgroundResource(R.drawable.button_bg_round);
+                            btnC.setBackgroundResource(R.drawable.button_bg_round);
+                            btnD.setBackgroundResource(R.drawable.button_bg_round);
+                            currentQues++;
+                            indexQues++;
+                            setTextview();
+                            btnConfirm.setEnabled(false);
+                        }
+                    }, 1000);
                 } else {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
                         mScore++;
                     }
-                    exitToResult();
+                    showRightAnswer();
+                    handlerAnswer = new Handler();
+                    handlerAnswer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            exitToResult();
+                        }
+                    }, 1000);
                 }
             }
         });
     }
 
-    private void changeBgButton() {
+    private void showRightAnswer(){
+        if (listQuestion.get(indexQues).getAnswer().equals("A")) {
+            btnA.setBackgroundResource(R.drawable.button_bg_round_correct);
+        } else if (listQuestion.get(indexQues).getAnswer().equals("B")) {
+            btnB.setBackgroundResource(R.drawable.button_bg_round_correct);
+        } else if (listQuestion.get(indexQues).getAnswer().equals("C")) {
+            btnC.setBackgroundResource(R.drawable.button_bg_round_correct);
+        } else if (listQuestion.get(indexQues).getAnswer().equals("D")) {
+            btnD.setBackgroundResource(R.drawable.button_bg_round_correct);
+        }
+    }
+
+    private void changeBgButton(String choice) {
         if (onChosing.equals("A")) {
             btnA.setBackgroundResource(R.drawable.button_bg_round_chosen);
             btnB.setBackgroundResource(R.drawable.button_bg_round);

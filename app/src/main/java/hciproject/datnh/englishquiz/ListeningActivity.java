@@ -57,6 +57,7 @@ public class ListeningActivity extends AppCompatActivity {
     private int position = 0;
     private CountDownTimer timer;
     private int difficult = 1;
+    private Handler handlerAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,23 +185,37 @@ public class ListeningActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentQues < numQues) {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
+                        showRightAnswer();
                         mScore++;
                         txtScore.setText("" + mScore);
-                        btnA.setBackgroundResource(R.drawable.button_bg_round);
-                        btnB.setBackgroundResource(R.drawable.button_bg_round);
-                        btnC.setBackgroundResource(R.drawable.button_bg_round);
-                        btnD.setBackgroundResource(R.drawable.button_bg_round);
-                        currentQues++;
-                        indexQues++;
-                        setTextview();
-                        if (mediaPlayer.isPlaying()) {
-                            mediaPlayer.stop();
-                        }
-                        prepareMedia();
-                        mediaPlayer.start();
-                        btnConfirm.setEnabled(false);
+                        handlerAnswer = new Handler();
+                        handlerAnswer.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                btnA.setBackgroundResource(R.drawable.button_bg_round);
+                                btnB.setBackgroundResource(R.drawable.button_bg_round);
+                                btnC.setBackgroundResource(R.drawable.button_bg_round);
+                                btnD.setBackgroundResource(R.drawable.button_bg_round);
+                                currentQues++;
+                                indexQues++;
+                                setTextview();
+                                if (mediaPlayer.isPlaying()) {
+                                    mediaPlayer.stop();
+                                }
+                                prepareMedia();
+                                mediaPlayer.start();
+                                btnConfirm.setEnabled(false);
+                            }
+                        }, 1000);
                     } else {
-                        exitToResult();
+                        showRightAnswer();
+                        handlerAnswer = new Handler();
+                        handlerAnswer.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                exitToResult();
+                            }
+                        }, 1000);
                     }
                 } else {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
@@ -235,6 +250,18 @@ public class ListeningActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), listSong.get(position).getFile());
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         seekBar.setMax(mediaPlayer.getDuration());
+    }
+
+    private void showRightAnswer() {
+        if (listQuestion.get(indexQues).getAnswer().equals("A")) {
+            btnA.setBackgroundResource(R.drawable.button_bg_round_correct);
+        } else if (listQuestion.get(indexQues).getAnswer().equals("B")) {
+            btnB.setBackgroundResource(R.drawable.button_bg_round_correct);
+        } else if (listQuestion.get(indexQues).getAnswer().equals("C")) {
+            btnC.setBackgroundResource(R.drawable.button_bg_round_correct);
+        } else if (listQuestion.get(indexQues).getAnswer().equals("D")) {
+            btnD.setBackgroundResource(R.drawable.button_bg_round_correct);
+        }
     }
 
     private void changeBgButton(String choice) {

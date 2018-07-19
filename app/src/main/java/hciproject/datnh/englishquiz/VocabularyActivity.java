@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -124,6 +126,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 //Set up word
                 word = entity1.getWord();
                 blankWord = entity1.getBlankWord();
+                SystemClock.sleep(1500);
                 showWord.setText(blankWord);
             }
         });
@@ -164,11 +167,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 txtScore.setText(score + "");
                 showWord = (TextView) findViewById(R.id.txtShowWord);
                 showWord.setText(word);
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                //pause
                 goToNextQuestion();
 
             } else {
