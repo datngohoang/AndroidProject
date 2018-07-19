@@ -11,12 +11,16 @@
         android:layout_height="57dp"
         android:background="#040147">
 
-        <TextView
-            android:layout_width="69dp"
-            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/imgInfo"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="howToPlay"
+            app:srcCompat="@drawable/info" />
 
         <TextView
-            android:layout_width="478dp"
+            android:layout_width="461dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="WORD"
@@ -72,23 +76,12 @@
                 android:textSize="35dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtCountFail"
-                android:layout_width="283dp"
-                android:layout_height="64dp"
-                android:gravity="center"
-                android:text="5"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="40dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="15dp"
-                android:layout_height="64dp"
+            <ImageView
+                android:id="@+id/imgCountFail"
+                android:layout_width="295dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center" />
+                app:srcCompat="@drawable/heart5" />
 
             <TextView
                 android:id="@+id/txtScore"

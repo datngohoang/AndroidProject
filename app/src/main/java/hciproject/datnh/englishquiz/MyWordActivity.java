@@ -62,34 +62,6 @@ public class MyWordActivity extends AppCompatActivity {
         lvDictionary.setAdapter(customAdapter);
 
         editWord = (SearchView) findViewById(R.id.editWord);
-//        editWord.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start,
-//                                          int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start,
-//                                      int before, int count) {
-//                for (WordQuizEntity w:arrWord) {
-//                    if(w.getName().contains(s.toString())){
-//                        arrSearchWord.add(w);
-//                    }
-//                }
-//                customAdapter = new CustomAdapter(customAdapter.getContext(),R.layout.list_word,arrSearchWord);
-//                // t nghi là bị sai ở
-//                lvDictionary.setAdapter(customAdapter);
-//
-//            }
-//        });
-
-
         editWord.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

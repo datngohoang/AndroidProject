@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,8 +31,8 @@ public class VocabularyActivity extends AppCompatActivity {
     private Button btnWord;
     private int score = 0;
     private TextView showWord;
-    private TextView showFail;
     private TextView showScore;
+    private ImageView viewHeart;
     private long time;
     private TextView txtTimer;
     private String[] listQuestion;
@@ -161,13 +162,24 @@ public class VocabularyActivity extends AppCompatActivity {
                 score = score + 10;
                 TextView txtScore = (TextView) findViewById(R.id.txtScore);
                 txtScore.setText(score + "");
+                showWord = (TextView) findViewById(R.id.txtShowWord);
+                showWord.setText(word);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 goToNextQuestion();
+
             } else {
                 invisibleButton(btnWord);
             }
         } else {
             if (countFail == 1) {
                 //Fail còn 1, Chuyển sang trang result
+                showWord = (TextView) findViewById(R.id.txtShowWord);
+                showWord.setText(word);
+
                 Intent intent = new Intent(this, ResultActivity.class);
                 //Set score
                 ScoreStorage scoreStorage = new ScoreStorage(this);
@@ -175,12 +187,16 @@ public class VocabularyActivity extends AppCompatActivity {
                 intent.putExtra("scoreFromIntent", SCORE_FROM_VOCABULARY);
                 intent.putExtra("finalScore", score + "");
                 timer.cancel();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 startActivity(intent);
             } else {
                 //Fail < 5, sai -1
                 countFail = countFail - 1;
-                showFail = (TextView) findViewById(R.id.txtCountFail);
-                showFail.setText(countFail + "");
+                countFail();
             }
             invisibleButton(btnWord);
         }
@@ -232,5 +248,44 @@ public class VocabularyActivity extends AppCompatActivity {
                     }
                 })
         .show();
+    }
+
+    public void howToPlay (View view){
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("How to play")
+                .setMessage("Try to guess the secret word one letter at a time!\n"+
+                        "If you guess an incorrect letter, your heart will lose.\n" +
+                        "To WIN, spell the word before you run out of hearts!")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+
+                .show();
+    }
+
+    public void countFail(){
+        viewHeart = (ImageView) findViewById(R.id.imgCountFail);
+
+        switch(countFail)
+        {
+            case 5 :
+                viewHeart.setImageResource(R.drawable.heart5);
+                break;
+            case 4 :
+                viewHeart.setImageResource(R.drawable.heart4);
+                break;
+            case 3 :
+                viewHeart.setImageResource(R.drawable.heart3);
+                break;
+            case 2 :
+                viewHeart.setImageResource(R.drawable.heart2);
+                break;
+            case 1 :
+                viewHeart.setImageResource(R.drawable.heart1);
+                break;
+        }
     }
 }
