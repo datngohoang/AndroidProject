@@ -7,6 +7,7 @@ public class WordQuizEntity {
     private String blankWord;
     private String meaning;
     private String type;
+    private int checkFavorite;
 
     public WordQuizEntity() {
     }
