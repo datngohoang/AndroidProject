@@ -39,6 +39,7 @@ public class FakeController {
             entity.setAnswerC("Answer C");
             entity.setAnswerD("Answer D");
             entity.setAnswer(answers[n]);
+            entity.setExplain("Because the answer is " + answers[n]);
             entity.setDifficult(difficult);
 
             //set random filename
@@ -78,6 +79,7 @@ public class FakeController {
             entity.setAnswerC("Answer C");
             entity.setAnswerD("Answer D");
             entity.setAnswer(answers[n]);
+            entity.setExplain("Because the answer is " + answers[n]);
             entity.setDifficult(difficult);
 
             entities.add(entity);
@@ -101,6 +103,8 @@ public class FakeController {
                 "U S A B I L I T Y", "E F F E C T I V E N E S S"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
                 "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S"};
+        String[] meaning = {"Từ vựng", "Nhà Máy", "HIệu quả",
+                "Độ sử dụng", "Hiệu suất"};
 
         for (int i = 0; i < 5; i++) {
             WordQuizEntity entity = new WordQuizEntity();
@@ -108,6 +112,8 @@ public class FakeController {
             entity.setId(i);
             entity.setWord(word[i]);
             entity.setBlankWord(blankWord[i]);
+            entity.setType("n");
+            entity.setMeaning(meaning[i]);
             entities.add(entity);
         }
 

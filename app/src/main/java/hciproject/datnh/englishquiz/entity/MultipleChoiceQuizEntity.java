@@ -9,11 +9,12 @@ public class MultipleChoiceQuizEntity {
     private String answerC;
     private String answerD;
     private String answer;
+    private String explain;
 
     public MultipleChoiceQuizEntity() {
     }
 
-    public MultipleChoiceQuizEntity(int id, int difficult, String question, String answerA, String answerB, String answerC, String answerD, String answer) {
+    public MultipleChoiceQuizEntity(int id, int difficult, String question, String answerA, String answerB, String answerC, String answerD, String answer, String explain) {
         this.id = id;
         this.difficult = difficult;
         this.question = question;
@@ -22,6 +23,7 @@ public class MultipleChoiceQuizEntity {
         this.answerC = answerC;
         this.answerD = answerD;
         this.answer = answer;
+        this.explain = explain;
     }
 
     public int getId() {
@@ -86,5 +88,13 @@ public class MultipleChoiceQuizEntity {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
     }
 }
