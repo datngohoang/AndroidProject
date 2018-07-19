@@ -184,44 +184,46 @@ public class ListeningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentQues < numQues) {
+                    showRightAnswer();
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
-                        showRightAnswer();
                         mScore++;
                         txtScore.setText("" + mScore);
-                        handlerAnswer = new Handler();
-                        handlerAnswer.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                btnA.setBackgroundResource(R.drawable.button_bg_round);
-                                btnB.setBackgroundResource(R.drawable.button_bg_round);
-                                btnC.setBackgroundResource(R.drawable.button_bg_round);
-                                btnD.setBackgroundResource(R.drawable.button_bg_round);
-                                currentQues++;
-                                indexQues++;
-                                setTextview();
-                                if (mediaPlayer.isPlaying()) {
-                                    mediaPlayer.stop();
-                                }
-                                prepareMedia();
-                                mediaPlayer.start();
-                                btnConfirm.setEnabled(false);
-                            }
-                        }, 1000);
-                    } else {
-                        showRightAnswer();
-                        handlerAnswer = new Handler();
-                        handlerAnswer.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                exitToResult();
-                            }
-                        }, 1000);
                     }
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                    }
+                    handlerAnswer = new Handler();
+                    handlerAnswer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            btnA.setBackgroundResource(R.drawable.button_bg_round);
+                            btnB.setBackgroundResource(R.drawable.button_bg_round);
+                            btnC.setBackgroundResource(R.drawable.button_bg_round);
+                            btnD.setBackgroundResource(R.drawable.button_bg_round);
+                            currentQues++;
+                            indexQues++;
+                            setTextview();
+                            prepareMedia();
+                            mediaPlayer.start();
+                            playCircle();
+                            btnConfirm.setEnabled(false);
+                        }
+                    }, 1000);
                 } else {
                     if (listQuestion.get(indexQues).getAnswer().equals(onChosing)) {
                         mScore++;
                     }
-                    exitToResult();
+                    showRightAnswer();
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                    }
+                    handlerAnswer = new Handler();
+                    handlerAnswer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            exitToResult();
+                        }
+                    }, 1000);
                 }
             }
         });

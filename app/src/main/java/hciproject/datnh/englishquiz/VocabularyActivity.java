@@ -39,6 +39,7 @@ public class VocabularyActivity extends AppCompatActivity {
     private TextView txtTimer;
     private String[] listQuestion;
     private CountDownTimer timer = null;
+    private int flagFirstIn = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 WordQuizEntity entity = ApiConnector.callWordApi();
                 setUp(entity);
                 setUpTimer();
+                flagFirstIn = 1;
             }
         };
         return runnable;
@@ -126,8 +128,10 @@ public class VocabularyActivity extends AppCompatActivity {
                 //Set up word
                 word = entity1.getWord();
                 blankWord = entity1.getBlankWord();
-//                //pause
-//                SystemClock.sleep(1500);
+                //pause
+                if (flagFirstIn != 0) {
+                    SystemClock.sleep(1500);
+                }
                 showWord.setText(blankWord);
             }
         });
@@ -168,8 +172,6 @@ public class VocabularyActivity extends AppCompatActivity {
                 txtScore.setText(score + "");
                 showWord = (TextView) findViewById(R.id.txtShowWord);
                 showWord.setText(word);
-                //pause
-                SystemClock.sleep(1500);
                 goToNextQuestion();
 
             } else {
@@ -180,9 +182,6 @@ public class VocabularyActivity extends AppCompatActivity {
                 //Fail còn 1, Chuyển sang trang result
                 showWord = (TextView) findViewById(R.id.txtShowWord);
                 showWord.setText(word);
-                //pause
-                SystemClock.sleep(1500);
-
                 Intent intent = new Intent(this, ResultActivity.class);
                 //Set score
                 ScoreStorage scoreStorage = new ScoreStorage(this);
