@@ -17,7 +17,7 @@
             android:layout_width="550dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="         MY VOCABULARY"
+            android:text="DICTIONARY"
             android:textColor="#ffffff"
             android:textSize="28dp" />
 

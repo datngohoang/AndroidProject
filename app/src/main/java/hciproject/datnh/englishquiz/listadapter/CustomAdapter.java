@@ -64,22 +64,6 @@ public class CustomAdapter extends ArrayAdapter<WordQuizEntity> implements Filte
         TextView txtWord, txtMean, txtType;
     }
 
-//    public void filter(String charText) {
-//        charText = charText.toLowerCase(Locale.getDefault());
-//        word.clear();
-//        if (charText.length() == 0) {
-//            word.addAll(filterWord);
-//        }
-//        else
-//        {
-//            for (WordQuizEntity w: filterWord) {
-//                if (w.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-//                    word.add(w);
-//                }
-//            }
-//        }
-//        notifyDataSetChanged();
-//    }
 @Override
 public Filter getFilter() {
     if (valueFilter == null) {

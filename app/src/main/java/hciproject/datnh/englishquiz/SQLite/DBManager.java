@@ -2,12 +2,17 @@ package hciproject.datnh.englishquiz.SQLite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
+
 
 public class DBManager extends SQLiteOpenHelper{
     public static final String DATABASE_NAME ="dictionary_list";
@@ -27,7 +32,7 @@ public class DBManager extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sqlQuery = "CREATE TABLE "+TABLE_NAME +" (" +
-                ID +" integer primary key, "+
+                ID +"  primary key, "+
                 NAME + " TEXT, "+
                 MEANING  +" TEXT, "+
                 TYPE +" TEXT)";
@@ -39,16 +44,18 @@ public class DBManager extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
-        Toast.makeText(context, "Drop successfylly", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Drop ", Toast.LENGTH_SHORT).show();
     }
 
     //Add new a 
     public void addword(WordQuizEntity word){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(ID, word.getId());
         values.put(NAME, word.getName());
         values.put(MEANING, word.getMeaning());
         values.put(TYPE, word.getType());
+
         //Neu de null thi khi value bang null thi loi
 
         db.insert(TABLE_NAME,null,values);
@@ -56,15 +63,34 @@ public class DBManager extends SQLiteOpenHelper{
         db.close();
     }
 
-    public int Update(WordQuizEntity word){
+    public void deleteWord(WordQuizEntity word) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        db.delete(TABLE_NAME, ID + " = ?",
+                new String[] { String.valueOf(word.getId()) });
+        db.close();
+    }
 
-        values.put(NAME,word.getName());
+    public List<WordQuizEntity> getAllWord() {
+        List<WordQuizEntity> listWord = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
-        return db.update(TABLE_NAME,values,ID +"=?",new String[] { String.valueOf(word.getId())});
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-
+        if (cursor.moveToFirst()) {
+            do {
+                WordQuizEntity word = new WordQuizEntity();
+                word.setId(cursor.getInt(0));
+                word.setName(cursor.getString(1));
+                word.setMeaning(cursor.getString(2));
+                word.setType(cursor.getString(3));
+                listWord.add(word);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listWord;
     }
 
 }

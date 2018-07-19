@@ -7,19 +7,18 @@ public class WordQuizEntity {
     private String blankWord;
     private String meaning;
     private String type;
-    private int checkFavorite;
 
     public WordQuizEntity() {
     }
 
-    public WordQuizEntity(int id, String name, String word, String blankWord) {
-        this.id = id;
+    public WordQuizEntity( String name, String word, String blankWord) {
         this.name = name;
         this.word = word;
         this.blankWord = blankWord;
     }
 
-    public WordQuizEntity(String name, String meaning, String type) {
+    public WordQuizEntity(int id, String name, String meaning, String type) {
+        this.id = id;
         this.name = name;
         this.meaning = meaning;
         this.type = type;
