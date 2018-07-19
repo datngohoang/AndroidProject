@@ -126,10 +126,6 @@ public class VocabularyActivity extends AppCompatActivity {
                 //Set up word
                 word = entity1.getWord();
                 blankWord = entity1.getBlankWord();
-
-//                //pause
-//                SystemClock.sleep(1500);
-
                 showWord.setText(blankWord);
             }
         });
@@ -213,7 +209,13 @@ public class VocabularyActivity extends AppCompatActivity {
     }
 
     public void goToNextQuestion() {
-        SystemClock.sleep(500);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+            }
+        }, 2000);
+
         timer.cancel();
         showAgainButton();
         //Call api
