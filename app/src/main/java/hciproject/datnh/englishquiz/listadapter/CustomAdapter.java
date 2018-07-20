@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import hciproject.datnh.englishquiz.R;
+import hciproject.datnh.englishquiz.SQLite.DBManager;
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
 import hciproject.datnh.englishquiz.listener.MyViewOnclickListener;
 
@@ -27,6 +28,8 @@ public class CustomAdapter extends ArrayAdapter<WordQuizEntity> implements Filte
     private List<WordQuizEntity> allWord;
     private List<WordQuizEntity> filterWord;
     ValueFilter valueFilter;
+
+
 
     public CustomAdapter(Context context, int resource, ArrayList<WordQuizEntity> word) {
         super(context, resource, word);
@@ -53,13 +56,18 @@ public class CustomAdapter extends ArrayAdapter<WordQuizEntity> implements Filte
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        WordQuizEntity WordQuizEntity = word.get(position);
-        viewHolder.txtWord.setText(WordQuizEntity.getId() + "");
-        viewHolder.txtWord.setText(WordQuizEntity.getName());
-        viewHolder.txtMean.setText(WordQuizEntity.getMeaning());
-        viewHolder.txtType.setText(WordQuizEntity.getType());
-
-        viewHolder.imgView.setOnClickListener(new MyViewOnclickListener(context, WordQuizEntity));
+        WordQuizEntity entity = word.get(position);
+        viewHolder.txtWord.setText(entity.getId() + "");
+        viewHolder.txtWord.setText(entity.getName());
+        viewHolder.txtMean.setText(entity.getMeaning());
+        viewHolder.txtType.setText(entity.getType());
+        DBManager dbManager = new DBManager(context);
+        if(!dbManager.checkWord(entity.getId())){
+            viewHolder.imgView.setImageResource(R.drawable.nofavorite);
+        }else{
+            viewHolder.imgView.setImageResource(R.drawable.favorite);
+        }
+        viewHolder.imgView.setOnClickListener(new MyViewOnclickListener(context, entity));
 
         return convertView;
     }

@@ -184,7 +184,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 timer.cancel();
                 AlertDialog alertDialog = new AlertDialog.Builder(this)
                         .setTitle("You lose")
-                        .setMessage("Answer: " + crrWord.getName() + "\n" + "Type: (" + crrWord.getType() + ")"
+                        .setMessage("Answer: " + crrWord.getName() + "\n" + "Type:" + crrWord.getType()
                         + "\n" + "Meaning: " + crrWord.getMeaning())
                         .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             @Override

@@ -47,6 +47,7 @@ public class MyWordActivity extends AppCompatActivity {
     }
 
     public void showAllWord(View view){
+
         lvDictionary = (ListView) findViewById(R.id.lvDictionary);
         Collections.sort(arrWordAPI, new Comparator<WordQuizEntity>() {
             @Override
@@ -57,7 +58,6 @@ public class MyWordActivity extends AppCompatActivity {
 
         customAdapter = new CustomAdapter(this,R.layout.list_word,arrWordAPI);
         lvDictionary.setAdapter(customAdapter);
-
     }
 
     public void showAllWordFirst(){
@@ -75,6 +75,7 @@ public class MyWordActivity extends AppCompatActivity {
     }
 
     public void showFavoriteWord(View view){
+
         lvDictionary = (ListView) findViewById(R.id.lvDictionary);
         arrWordSQLite = dbManager.getAllWord();
         Collections.sort(arrWordSQLite, new Comparator<WordQuizEntity>() {
@@ -151,16 +152,5 @@ public class MyWordActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void addWord(WordQuizEntity word){
-        dbManager.addword(word);
-//        imgView.setImageResource(R.drawable.favorite);
-    }
-
-    public void deleteWord(WordQuizEntity word){
-        dbManager.deleteWord(word);
-//        imgView.setImageResource(R.drawable.nofavorite);
-    }
-
 
 }
