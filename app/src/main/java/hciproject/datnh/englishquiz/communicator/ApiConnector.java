@@ -30,10 +30,10 @@ import hciproject.datnh.englishquiz.model.WordQuizModel;
 
 public class ApiConnector{
     public static String host = "http://localhost:8080";
-    public static String listeningResource = "/question/listening";
-    public static String wordResource = "/question/word-quiz";
-    public static String allWordResource = "/question/word-quiz/all";
-    public static String multipleChoiceRequest = "/question/multiple-choice";
+    public static String listeningResource = "/listening";
+    public static String wordResource = "/word-quiz/random";
+    public static String allWordResource = "/word-quiz/all";
+    public static String multipleChoiceRequest = "/multiple-choice";
 
     public static WordQuizEntity callWordApi() {
         String uri = host + wordResource;

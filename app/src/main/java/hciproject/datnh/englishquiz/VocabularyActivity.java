@@ -75,8 +75,9 @@ public class VocabularyActivity extends AppCompatActivity {
                 //get data
                 WordQuizEntity entity = ApiConnector.callWordApi();
                 crrWord = entity;
+
                 setUp(entity);
-                setUpTimer();
+
                 flagFirstIn = 1;
             }
         };
@@ -133,7 +134,9 @@ public class VocabularyActivity extends AppCompatActivity {
                 //pause
                 if (flagFirstIn != 0) {
                     SystemClock.sleep(1500);
+
                 }
+                setUpTimer();
                 showWord.setText(blankWord);
             }
         });
@@ -185,7 +188,7 @@ public class VocabularyActivity extends AppCompatActivity {
                 AlertDialog alertDialog = new AlertDialog.Builder(this)
                         .setTitle("You lose")
                         .setMessage("Answer: " + crrWord.getName() + "\n" + "Type:" + crrWord.getType()
-                        + "\n" + "Meaning: " + crrWord.getMeaning())
+                        + "\n" + "Mean: " + crrWord.getMeaning())
                         .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -219,13 +222,6 @@ public class VocabularyActivity extends AppCompatActivity {
     }
 
     public void goToNextQuestion() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-
-            }
-        }, 2000);
-
         timer.cancel();
         showAgainButton();
         //Call api

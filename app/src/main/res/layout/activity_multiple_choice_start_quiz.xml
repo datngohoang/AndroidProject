@@ -115,7 +115,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="400dp"
+            android:layout_width="389dp"
             android:layout_height="match_parent">
 
             <ImageView
@@ -137,8 +137,9 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnA"
@@ -154,19 +155,19 @@
                 android:id="@+id/btnB"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/button_bg_round"
                 android:text="B"
-                android:textSize="40dp"
-                android:layout_marginBottom="12dp"/>
+                android:textSize="40dp" />
 
             <Button
                 android:id="@+id/btnC"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/button_bg_round"
                 android:text="C"
-                android:textSize="40dp"
-                android:layout_marginBottom="12dp"/>
+                android:textSize="40dp" />
 
             <Button
                 android:id="@+id/btnD"
@@ -174,7 +175,7 @@
                 android:layout_height="59dp"
                 android:background="@drawable/button_bg_round"
                 android:text="D"
-                android:textSize="40dp"/>
+                android:textSize="40dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

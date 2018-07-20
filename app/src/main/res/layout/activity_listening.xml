@@ -157,7 +157,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="381dp"
+                android:layout_width="366dp"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -165,7 +165,6 @@
                     android:layout_height="260dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="0dp"
                     app:srcCompat="@drawable/notebook" />
 
                 <TextView
@@ -173,13 +172,15 @@
                     android:layout_width="278dp"
                     android:layout_height="213dp"
                     android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
                     android:text=""
-                    android:textSize="24dp"/>
+                    android:textSize="24dp" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
                 android:orientation="vertical">
 
                 <Button
