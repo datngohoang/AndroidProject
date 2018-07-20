@@ -98,17 +98,17 @@ public class FakeController {
         WordQuizModel model = new WordQuizModel();
         List<WordQuizEntity> entities = new ArrayList<>();
 
-        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work"};
+        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work", "Cat", "Beautiful", "Ant"};
         String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
-                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K"};
+                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K", "C A T", "B E A U T I F U L", "A N T"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
-                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _"};
+                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _", "C _ ", "B E _ _ T _ F _ L", "A N _"};
         String[] meaning = {"Từ vựng", "Nhà Máy", "Hiệu quả",
-                "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc"};
+                "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc", "Con mèo", "Xinh đẹp", "Con kiến"};
         String[] type = {"(n)", "(n)", "(n)",
-                "(n)", "(n)", "(n)", "(v)", "(v)"};
+                "(n)", "(n)", "(n)", "(v)", "(v)", "(n)", "(a)", "(n)"};
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 11; i++) {
             WordQuizEntity entity = new WordQuizEntity();
             entity.setName(name[i]);
             entity.setId(i);
@@ -131,18 +131,18 @@ public class FakeController {
 
         WordQuizEntity entity = new WordQuizEntity();
 
-        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work"};
+        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work", "Cat", "Beautiful", "Ant"};
         String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
-                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K"};
+                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K", "C A T", "B E A U T I F U L", "A N T"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
-                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _"};
+                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _", "C _ ", "B E _ _ T _ F _ L", "A N _"};
         String[] meaning = {"Từ vựng", "Nhà Máy", "Hiệu quả",
-                "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc"};
+                "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc", "Con mèo", "Xinh đẹp", "Con kiến"};
         String[] type = {"(n)", "(n)", "(n)",
-                "(n)", "(n)", "(n)", "(v)", "(v)"};
+                "(n)", "(n)", "(n)", "(v)", "(v)", "(n)", "(a)", "(n)"};
 
         Random random = new Random();
-        int n = random.nextInt(8);
+        int n = random.nextInt(11);
         entity.setName(name[n]);
         entity.setId(n);
         entity.setWord(word[n]);
