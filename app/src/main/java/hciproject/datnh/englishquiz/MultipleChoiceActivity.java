@@ -34,7 +34,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         fromScreen = bd.getInt("fromActivity");//0,1
         if(fromScreen == 0){
             txtScreenTitle = (TextView) findViewById(R.id.txtTitle);
-            String title = "MULTIPLE CHOICE";
+            String title = "GRAMMAR";
             txtScreenTitle.setText(title);
         } else if(fromScreen == 1){
             txtScreenTitle = (TextView) findViewById(R.id.txtTitle);

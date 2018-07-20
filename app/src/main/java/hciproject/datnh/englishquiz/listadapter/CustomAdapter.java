@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Locale;
 
 import hciproject.datnh.englishquiz.R;
 import hciproject.datnh.englishquiz.entity.WordQuizEntity;
+import hciproject.datnh.englishquiz.listener.MyViewOnclickListener;
 
 public class CustomAdapter extends ArrayAdapter<WordQuizEntity> implements Filterable {
     private Context context;
@@ -40,18 +42,25 @@ public class CustomAdapter extends ArrayAdapter<WordQuizEntity> implements Filte
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.list_word, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.txtId = (TextView) convertView.findViewById(R.id.txtId);
             viewHolder.txtWord = (TextView) convertView.findViewById(R.id.txtWord);
             viewHolder.txtMean = (TextView) convertView.findViewById(R.id.txtMean);
             viewHolder.txtType = (TextView) convertView.findViewById(R.id.txtType);
+            viewHolder.imgView = (ImageView) convertView.findViewById(R.id.imgView );
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         WordQuizEntity WordQuizEntity = word.get(position);
+        viewHolder.txtWord.setText(WordQuizEntity.getId() + "");
         viewHolder.txtWord.setText(WordQuizEntity.getName());
         viewHolder.txtMean.setText(WordQuizEntity.getMeaning());
         viewHolder.txtType.setText(WordQuizEntity.getType());
+
+        viewHolder.imgView.setOnClickListener(new MyViewOnclickListener(context, WordQuizEntity));
+
         return convertView;
     }
 
@@ -61,7 +70,8 @@ public class CustomAdapter extends ArrayAdapter<WordQuizEntity> implements Filte
     }
 
     public class ViewHolder {
-        TextView txtWord, txtMean, txtType;
+        TextView txtId, txtWord, txtMean, txtType;
+        ImageView imgView;
     }
 
 @Override
@@ -81,8 +91,9 @@ public Filter getFilter() {
                 ArrayList<WordQuizEntity> filterList = new ArrayList<WordQuizEntity>();
                 for (int i = 0; i < word.size(); i++) {
                     if ((word.get(i).getName().toUpperCase())
+                            .contains(constraint.toString().toUpperCase()) ||(word.get(i).getMeaning().toUpperCase())
                             .contains(constraint.toString().toUpperCase())) {
-                        WordQuizEntity w = new WordQuizEntity(word.get(i)
+                        WordQuizEntity w = new WordQuizEntity(word.get(i).getId(),word.get(i)
                                 .getName(), word.get(i)
                                 .getMeaning(), word.get(i).getType());
                         filterList.add(w);

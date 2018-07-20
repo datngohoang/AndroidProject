@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="howToPlay"
-            app:srcCompat="@drawable/info" />
+            app:srcCompat="@drawable/question" />
 
         <TextView
             android:layout_width="461dp"

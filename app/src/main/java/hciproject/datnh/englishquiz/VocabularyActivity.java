@@ -271,7 +271,7 @@ public class VocabularyActivity extends AppCompatActivity {
     }
 
     public void howToPlay (View view){
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("How to play")
                 .setMessage("Try to guess the secret word one letter at a time!\n"+
                         "If you guess an incorrect letter, your heart will lose.\n" +

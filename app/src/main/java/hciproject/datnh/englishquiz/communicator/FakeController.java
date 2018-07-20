@@ -98,13 +98,15 @@ public class FakeController {
         WordQuizModel model = new WordQuizModel();
         List<WordQuizEntity> entities = new ArrayList<>();
 
-        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness"};
+        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work"};
         String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
-                "U S A B I L I T Y", "E F F E C T I V E N E S S"};
+                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K"};
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
-                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S"};
-        String[] meaning = {"Từ vựng", "Nhà Máy", "HIệu quả",
-                "Độ sử dụng", "Hiệu suất"};
+                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _"};
+        String[] meaning = {"Từ vựng", "Nhà Máy", "Hiệu quả",
+                "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc"};
+        String[] type = {"(n)", "(n)", "(n)",
+                "(n)", "(n)", "(n)", "(v)", "(v)"};
 
         for (int i = 0; i < 5; i++) {
             WordQuizEntity entity = new WordQuizEntity();
@@ -112,7 +114,7 @@ public class FakeController {
             entity.setId(i);
             entity.setWord(word[i]);
             entity.setBlankWord(blankWord[i]);
-            entity.setType("n");
+            entity.setType(type[i]);
             entity.setMeaning(meaning[i]);
             entities.add(entity);
         }

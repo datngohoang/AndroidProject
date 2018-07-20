@@ -70,8 +70,15 @@ public class DBManager extends SQLiteOpenHelper{
         db.close();
     }
 
-    public List<WordQuizEntity> getAllWord() {
-        List<WordQuizEntity> listWord = new ArrayList<>();
+    public void deleteWordById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, ID + " = ?",
+                new String[] { String.valueOf(id) });
+        db.close();
+    }
+
+    public ArrayList<WordQuizEntity> getAllWord() {
+        ArrayList<WordQuizEntity> listWord = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
@@ -91,6 +98,27 @@ public class DBManager extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return listWord;
+    }
+
+    public boolean checkWord(int id) {
+        boolean check = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[] { ID,
+                        NAME, MEANING ,TYPE }, ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+
+        if (!(cursor.moveToFirst()) || cursor.getCount() == 0) {
+            check = false;
+        } else {
+            check = true;
+            cursor.moveToFirst();
+        }
+
+        System.out.println("check = " + check);
+
+        cursor.close();
+        db.close();
+        return check;
     }
 
 }
