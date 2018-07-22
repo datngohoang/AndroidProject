@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -142,6 +143,7 @@ public class ListeningActivity extends AppCompatActivity {
 
         //set textview question
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
+        txtQuestion.setMovementMethod(new ScrollingMovementMethod());
         txtCurrent = (TextView) findViewById(R.id.txtCurrent);
         setTextview();
         //check answer

@@ -169,10 +169,9 @@
 
                 <TextView
                     android:id="@+id/txtQuestion"
-                    android:layout_width="278dp"
-                    android:layout_height="213dp"
+                    android:layout_width="282dp"
+                    android:layout_height="219dp"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="20dp"
                     android:text=""
                     android:textSize="24dp" />
             </RelativeLayout>
