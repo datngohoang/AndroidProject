@@ -54,6 +54,8 @@ public class ScoreActivity extends AppCompatActivity {
         quizImgView.setBackgroundColor(Color.BLUE);
         listeningImgView.setBackgroundColor(Color.TRANSPARENT);
         vocabularyImgView.setBackgroundColor(Color.TRANSPARENT);
+        TextView txtScoreName = (TextView) findViewById(R.id.txtScoreName);
+        txtScoreName.setText("GRAMMAR");
         txtScore = (TextView) findViewById(R.id.txtScore);
         String score = scoreStorage.getValue(ScoreStorage.NAMES[0], scoreStorage.SCORES[0]) + "\n" +
                 scoreStorage.getValue(ScoreStorage.NAMES[0], scoreStorage.SCORES[1]) + "\n" +
@@ -65,6 +67,8 @@ public class ScoreActivity extends AppCompatActivity {
         quizImgView.setBackgroundColor(Color.TRANSPARENT);
         listeningImgView.setBackgroundColor(Color.BLUE);
         vocabularyImgView.setBackgroundColor(Color.TRANSPARENT);
+        TextView txtScoreName = (TextView) findViewById(R.id.txtScoreName);
+        txtScoreName.setText("LISTEN");
         txtScore = (TextView) findViewById(R.id.txtScore);
         String score = scoreStorage.getValue(ScoreStorage.NAMES[1], scoreStorage.SCORES[0]) + "\n" +
                 scoreStorage.getValue(ScoreStorage.NAMES[1], scoreStorage.SCORES[1]) + "\n" +
@@ -76,6 +80,8 @@ public class ScoreActivity extends AppCompatActivity {
         quizImgView.setBackgroundColor(Color.TRANSPARENT);
         listeningImgView.setBackgroundColor(Color.TRANSPARENT);
         vocabularyImgView.setBackgroundColor(Color.BLUE);
+        TextView txtScoreName = (TextView) findViewById(R.id.txtScoreName);
+        txtScoreName.setText("WORD GAME");
         txtScore = (TextView) findViewById(R.id.txtScore);
         String score = scoreStorage.getValue(ScoreStorage.NAMES[2], scoreStorage.SCORES[0]) + "\n" +
                 scoreStorage.getValue(ScoreStorage.NAMES[2], scoreStorage.SCORES[1]) + "\n" +

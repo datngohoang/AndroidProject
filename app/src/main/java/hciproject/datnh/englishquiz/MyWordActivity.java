@@ -1,10 +1,12 @@
 package hciproject.datnh.englishquiz;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -47,7 +49,10 @@ public class MyWordActivity extends AppCompatActivity {
     }
 
     public void showAllWord(View view){
-
+        Button btnAllWord = (Button) findViewById(R.id.btnAllWord);
+        btnAllWord.setBackgroundColor(Color.GREEN);
+        Button btnFavorite = (Button) findViewById(R.id.btnFavorite);
+        btnFavorite.setBackgroundColor(Color.GRAY);
         lvDictionary = (ListView) findViewById(R.id.lvDictionary);
         Collections.sort(arrWordAPI, new Comparator<WordQuizEntity>() {
             @Override
@@ -61,6 +66,11 @@ public class MyWordActivity extends AppCompatActivity {
     }
 
     public void showAllWordFirst(){
+        Button btnAllWord = (Button) findViewById(R.id.btnAllWord);
+        btnAllWord.setBackgroundColor(Color.GREEN);
+        Button btnFavorite = (Button) findViewById(R.id.btnFavorite);
+        btnFavorite.setBackgroundColor(Color.GRAY);
+
         lvDictionary = (ListView) findViewById(R.id.lvDictionary);
         Collections.sort(arrWordAPI, new Comparator<WordQuizEntity>() {
             @Override
@@ -75,7 +85,10 @@ public class MyWordActivity extends AppCompatActivity {
     }
 
     public void showFavoriteWord(View view){
-
+        Button btnFavorite = (Button) findViewById(R.id.btnFavorite);
+        btnFavorite.setBackgroundColor(Color.GREEN);
+        Button btnAllWord = (Button) findViewById(R.id.btnAllWord);
+        btnAllWord.setBackgroundColor(Color.GRAY);
         lvDictionary = (ListView) findViewById(R.id.lvDictionary);
         arrWordSQLite = dbManager.getAllWord();
         Collections.sort(arrWordSQLite, new Comparator<WordQuizEntity>() {

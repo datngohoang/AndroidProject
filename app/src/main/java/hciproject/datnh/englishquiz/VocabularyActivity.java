@@ -177,6 +177,8 @@ public class VocabularyActivity extends AppCompatActivity {
                 txtScore.setText(score + "");
                 showWord = (TextView) findViewById(R.id.txtShowWord);
                 showWord.setText(word);
+                countFail = 5;
+                countFail();
                 goToNextQuestion();
 
             } else {

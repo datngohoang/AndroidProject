@@ -33,7 +33,8 @@ public class FakeController {
             n = random.nextInt(4);
             ListeningQuizEntity entity = new ListeningQuizEntity();
             entity.setId(i);
-            entity.setQuestion("This is question " + i + ". Answer: " + answers[n]);
+            entity.setQuestion("Which country is leading the circular economy shift?\n" +
+                    "Which country is winning the race to a circular economy? It’s not something one country can achieve by… " + i + ". Answer: " + answers[n]);
             entity.setAnswerA("Answer A");
             entity.setAnswerB("Answer B");
             entity.setAnswerC("Answer C");
@@ -73,7 +74,8 @@ public class FakeController {
             n = random.nextInt(4);
             MultipleChoiceQuizEntity entity = new MultipleChoiceQuizEntity();
             entity.setId(i);
-            entity.setQuestion("This is question " + i + ". Answer: " + answers[n]);
+            entity.setQuestion("Which country is leading the circular economy shift?\n" +
+                    "Which country is winning the race to a circular economy? It’s not something one country can achieve by…" + i + ". Answer: " + answers[n]);
             entity.setAnswerA("Answer A");
             entity.setAnswerB("Answer B");
             entity.setAnswerC("Answer C");
@@ -101,12 +103,12 @@ public class FakeController {
         String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work",
                 "Cat", "Beautiful", "Ant", "Car", "Bowl", "History","Game", "Attack"};
         String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
-                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K",
+                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K", "C A T",
                 "B E A U T I F U L", "A N T", "C A R","C U P", "B O W L", "H I S T O R Y", "G A M E", "A T T A C K"};
 
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
                 "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _",
-                "C _ ", "B E _ _ T _ F _ L", "A N _", "_ A R", "C U _", "B _ W L", "H _ S T _ R _", "G A M _","A _ _ A _ K"};
+                "C _ T", "B E _ _ T _ F _ L", "A N _", "_ A R", "C U _", "B _ W L", "H _ S T _ R _", "G A M _","A _ _ A _ K"};
 
         String[] meaning = {"Từ vựng", "Nhà Máy", "Hiệu quả",
                 "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc", "Con mèo", "Xinh đẹp", "Con kiến", "Xe hơi", "Cái bát","Lịch sử","Trò chơi","Tấn công"};
@@ -136,20 +138,32 @@ public class FakeController {
 
         WordQuizEntity entity = new WordQuizEntity();
 
-        String[] name = {"Vocabulary", "Enterprise", "Efficiency", "Usability", "Effectiveness", "Dog", "Play", "Work",
-                "Cat", "Beautiful", "Ant", "Car", "Bowl", "History","Game", "Attack"};
+        String[] name = {"Vocabulary", "Enterprise", "Efficiency",
+                "Usability", "Effectiveness", "Dog",
+                "Play", "Work","Cat",
+                "Beautiful", "Ant", "Car",
+                "Bowl", "History","Game", "Attack"};
         String[] word = {"V O C A B U L A R Y", "E N T E R P R I S E", "E F F I C I E N C Y",
-                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G", "P L A Y", "W O R K",
-                "B E A U T I F U L", "A N T", "C A R","C U P", "B O W L", "H I S T O R Y", "G A M E", "A T T A C K"};
+                "U S A B I L I T Y", "E F F E C T I V E N E S S", "D O G",
+                "P L A Y", "W O R K","C A T", "B E A U T I F U L",
+                "A N T", "C A R","C U P",
+                "B O W L", "H I S T O R Y", "G A M E", "A T T A C K"};
 
         String[] blankWord = {"V O _ A B _ L A _ Y", "E _ _ E _ P R _ S E", "E _ F I _ I E _ C Y",
-                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G", "P _ _ Y", "W _ R _",
-                "C _ ", "B E _ _ T _ F _ L", "A N _", "_ A R", "C U _", "B _ W L", "H _ S T _ R _", "G A M _","A _ _ A _ K"};
+                "U _ A B _ L I _ Y", "E F _ _ C T _ V E _ _ S S", "D _ G",
+                "P _ _ Y", "W _ R _", "C _ T", "B E _ _ T _ F _ L",
+                "A N _", "_ A R", "C U _", "B _ W L", "H _ S T _ R _", "G A M _","A _ _ A _ K"};
 
         String[] meaning = {"Từ vựng", "Nhà Máy", "Hiệu quả",
-                "Độ sử dụng", "Hiệu suất", "Con chó", "Chơi", "Làm việc", "Con mèo", "Xinh đẹp", "Con kiến", "Xe hơi", "Cái bát","Lịch sử","Trò chơi","Tấn công"};
+                "Độ sử dụng", "Hiệu suất", "Con chó",
+                "Chơi", "Làm việc", "Con mèo",
+                "Xinh đẹp", "Con kiến", "Xe hơi",
+                "Cái bát","Lịch sử","Trò chơi","Tấn công"};
         String[] type = {"(n)", "(n)", "(n)",
-                "(n)", "(n)", "(n)", "(v)", "(v)", "(n)", "(a)", "(n)", "(n)","(n)","(n)","(n)","(v)"};
+                "(n)", "(n)", "(n)",
+                "(v)", "(v)", "(n)",
+                "(a)", "(n)", "(n)",
+                "(n)","(n)","(n)","(v)"};
 
         Random random = new Random();
         int n = random.nextInt(16);
