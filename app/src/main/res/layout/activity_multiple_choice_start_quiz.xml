@@ -128,13 +128,8 @@
 
             <TextView
                 android:id="@+id/txtQuestion"
-<<<<<<< HEAD
                 android:layout_width="300dp"
                 android:layout_height="230dp"
-=======
-                android:layout_width="307dp"
-                android:layout_height="238dp"
->>>>>>> a9a900b1b805315385b6c3db37c1e67e7e2e0543
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
