@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -110,7 +111,7 @@ public class ListeningActivity extends AppCompatActivity {
         //set music
         handler = new Handler();
         seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.setEnabled(false);
+//        seekBar.setEnabled(false);
         prepareMedia();
         mediaPlayer.start();
         playCircle();
@@ -130,6 +131,12 @@ public class ListeningActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+        seekBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
         });
 
