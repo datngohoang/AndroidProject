@@ -15,7 +15,8 @@ public class AboutActivity extends AppCompatActivity {
 
         txtAbout = (TextView) findViewById(R.id.txtTeam);
         String scoreTitle = "Ngô Hoàng Đạt\n" +
-                "Trương Tổ Kiệt\n"
+                "Trương Tổ Kiệt\n" +
+                "Nguyễn Võ Phước Hưng"
                 ;
 
         txtAbout.setText(scoreTitle);
