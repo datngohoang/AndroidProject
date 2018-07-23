@@ -29,7 +29,7 @@ import hciproject.datnh.englishquiz.model.MultipleChoiceQuizModel;
 import hciproject.datnh.englishquiz.model.WordQuizModel;
 
 public class ApiConnector{
-    public static String host = "http://192.168.43.72:8080";
+    public static String host = "http://localhost:8080";
     public static String listeningResource = "/listening";
     public static String wordResource = "/word-quiz/random";
     public static String allWordResource = "/word-quiz/all";

@@ -37,14 +37,12 @@ public class DBManager extends SQLiteOpenHelper{
                 MEANING  +" TEXT, "+
                 TYPE +" TEXT)";
         db.execSQL(sqlQuery);
-        Toast.makeText(context, "Create successfylly", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
-        Toast.makeText(context, "Drop ", Toast.LENGTH_SHORT).show();
     }
 
     //Add new a 
