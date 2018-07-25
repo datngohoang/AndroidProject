@@ -7,6 +7,7 @@ public class WordQuizEntity {
     private String blankWord;
     private String meaning;
     private String type;
+    private String author;
 
     public WordQuizEntity() {
     }
@@ -79,5 +80,13 @@ public class WordQuizEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

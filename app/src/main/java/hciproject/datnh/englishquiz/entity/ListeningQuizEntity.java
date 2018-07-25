@@ -11,6 +11,7 @@ public class ListeningQuizEntity {
     private String answerD;
     private String answer;
     private String explain;
+    private String author;
 
     public ListeningQuizEntity() {
     }
@@ -106,5 +107,13 @@ public class ListeningQuizEntity {
 
     public void setExplain(String explain) {
         this.explain = explain;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
